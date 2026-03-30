@@ -1,0 +1,35 @@
+{
+  "name": "급탕설비",
+  "short_name": "급탕설비",
+  "description": "급탕량·보일러 출력 산정 시스템 — 기계설비 기술기준 별표5 · KDS 31 30 20",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff7ed",
+  "theme_color": "#c2410c",
+  "orientation": "portrait-primary",
+  "lang": "ko",
+  "categories": ["engineering", "utilities", "productivity"],
+  "icons": [
+    { "src": "./favicon-16.png",        "sizes": "16x16",   "type": "image/png" },
+    { "src": "./favicon-32.png",        "sizes": "32x32",   "type": "image/png" },
+    { "src": "./icon-72.png",           "sizes": "72x72",   "type": "image/png" },
+    { "src": "./icon-96.png",           "sizes": "96x96",   "type": "image/png" },
+    { "src": "./icon-128.png",          "sizes": "128x128", "type": "image/png" },
+    { "src": "./icon-144.png",          "sizes": "144x144", "type": "image/png" },
+    { "src": "./icon-152.png",          "sizes": "152x152", "type": "image/png" },
+    { "src": "./apple-touch-icon.png",  "sizes": "180x180", "type": "image/png" },
+    { "src": "./icon-192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-384.png",          "sizes": "384x384", "type": "image/png" },
+    { "src": "./icon-512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "./og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "급탕설비 산정 화면"
+    }
+  ],
+  "prefer_related_applications": false
+}
