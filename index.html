@@ -206,13 +206,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .modal-body{padding:15px 17px;}
 .modal-sec{font-size:11px;font-weight:900;color:#92400e;margin:13px 0 7px;display:flex;align-items:center;gap:5px;border-left:3px solid #c2410c;padding-left:8px;}
 
-/* ── PRINT ── */
-@media print{
-  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
-  .app-header,.tab-bar,.fab-calc,.fab-tooltip,.toast,.modal-ov,#guideModal,.hdr-btns .btn-g{display:none!important;}
-  .main-wrap{padding:0!important;}
-  .card{break-inside:avoid;box-shadow:none!important;border:1px solid #fcd9aa!important;}
-}
+/* ── PRINT: 아래 통합 블록으로 이전 ── */
 
 /* ── RESPONSIVE ── */
 @media(max-width:480px){
@@ -301,14 +295,69 @@ input[type="number"]{-moz-appearance:textfield;}
 .mob-save-bar{background:linear-gradient(135deg,#0f172a,#1e293b);padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;border-bottom:1px solid rgba(194,65,12,.2);}
 .mob-save-status{font-size:10px;font-weight:700;color:#fed7aa;}
 @media(max-width:620px){.mob-device{width:100%;max-width:340px;}.mob-wrap{padding:16px 10px 28px;}}
-/* ═══ print ═══ */
-@page{size:A4 portrait;margin:18mm;}
+/* ═══ A4 인쇄 전용 (통합 단일 블록) ═══ */
+@page{
+  size: A4 portrait;
+  margin: 15mm 18mm 15mm 18mm;
+}
 @media print{
-  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
-  html,body{margin:0;padding:0;width:100%;height:auto;}
-  .app-header,.tab-bar,.main-wrap,.fab-calc,.fab-tooltip,.toast,.modal-ov,#guideModal,.mob-wrap,.mob-save-bar,.export-bar{display:none!important;}
-  #a4-print-target{display:block!important;margin:0;padding:0;}
-  .a4-page{width:100%!important;max-width:100%!important;box-shadow:none!important;padding:0!important;margin:0!important;}
+  /* 색상·배경 강제 출력 */
+  *,*::before,*::after{
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  /* html/body 초기화 */
+  html,body{
+    margin:0 !important;
+    padding:0 !important;
+    width:100% !important;
+    height:auto !important;
+    background:#fff !important;
+  }
+  /* ★ 화면 UI 전체 숨김 (main-wrap 포함) */
+  .app-header,.tab-bar,.main-wrap,
+  .fab-calc,.fab-tooltip,
+  .toast,.modal-ov,#guideModal,
+  .mob-wrap,.mob-save-bar,.export-bar,
+  #pwa-banner,#ios-guide-modal,#pwa-install-btn,
+  .gm-tab,.pwa-inner{
+    display: none !important;
+  }
+  /* ★ a4-print-target만 단독 표시
+     (main-wrap 밖에 위치하기 때문에 위 숨김 규칙에 안 걸림) */
+  #a4-print-target{
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  /* A4 페이지 스타일
+     여백은 @page margin으로 처리 → padding:0 */
+  #a4-print-target .a4-page{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    font-size: 9.5pt !important;
+    color: #0c1a2e !important;
+    font-family: 'Pretendard','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',sans-serif !important;
+  }
+  /* 배경 그라디언트 강제 출력 */
+  #a4-print-target .a4-hbox{
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* 테이블 페이지 분리 방지 */
+  #a4-print-target table{ page-break-inside: auto; }
+  #a4-print-target tr{ page-break-inside: avoid; }
+  #a4-print-target thead{ display: table-header-group; }
+  /* 섹션 나눔 방지 */
+  #a4-print-target .a4-tit,
+  #a4-print-target .a4-sub{ page-break-after: avoid; }
+  #a4-print-target .a4-footer{ page-break-before: avoid; }
 }
 
 /* ── PWA 설치 버튼 ── */
@@ -833,9 +882,6 @@ input[type="number"]{-moz-appearance:textfield;}
     </div>
   </div>
 </div>
-
-<!-- A4 인쇄 타겟 -->
-<div id="a4-print-target" style="display:none;"></div>
 
 </div><!-- /main-wrap -->
 
@@ -1362,9 +1408,18 @@ function scaleA4(){
 /* ── 인쇄 ── */
 function printA4(){
   if(!window._calcResult){showToast('⚠️ 먼저 급탕량을 산정하세요');return;}
-  const t=document.getElementById('a4-print-target');
-  t.style.display='block'; window.print();
-  setTimeout(()=>t.style.display='none',1800);
+  const t = document.getElementById('a4-print-target');
+  /* ★ 최신 내용 동기화 */
+  const pg = document.getElementById('a4Page');
+  if(pg) t.innerHTML = pg.innerHTML;
+  t.style.display = 'block';
+  /* ★ DOM 완전 렌더링 후 인쇄 (rAF 2회) */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      window.print();
+      setTimeout(function(){ t.style.display = 'none'; }, 500);
+    });
+  });
 }
 
 /* ── PDF 저장 ── */
@@ -1618,7 +1673,7 @@ function renderA4(r){
   <span>🔥 급탕량·보일러 출력 산정서 · MANMIN-Ver2.0 · 기계설비 기술기준 별표5 · KDS 31 30 20</span>
   <span>작성자: ${projAuthor} · 작성일: ${ds}</span>
 </div>`;
-  document.getElementById('a4-print-target').innerHTML=document.getElementById('a4Page').outerHTML;
+  document.getElementById('a4-print-target').innerHTML=document.getElementById('a4Page').innerHTML;
   requestAnimationFrame(()=>requestAnimationFrame(scaleA4));
 }
 
@@ -1840,5 +1895,8 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
   <div class="ios-foot">급탕설비를 홈 화면에서 오프라인으로도 사용 가능합니다 ✓</div>
 </div>
+<!-- ★ A4 인쇄 타겟 (main-wrap 밖에 위치 — 인쇄 시 숨김 방지) -->
+<div id="a4-print-target" style="display:none;"></div>
+
 </body>
 </html>
