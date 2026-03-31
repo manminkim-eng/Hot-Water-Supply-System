@@ -69,9 +69,29 @@ input[type="number"]{-moz-appearance:textfield;}
 .main-wrap{max-width:1300px;margin:0 auto;padding:13px 13px 80px;}
 @media(max-width:479px){.main-wrap{padding:10px 9px 72px;}}
 .tab-panel{display:none;}.tab-panel.active{display:block;}
+/* ── 기존 two-col 유지 (타 탭용) ── */
 .two-col{display:grid;grid-template-columns:460px 1fr;gap:13px;align-items:start;}
 @media(max-width:1100px){.two-col{grid-template-columns:1fr 1fr;}}
 @media(max-width:760px){.two-col{grid-template-columns:1fr;}}
+
+/* ── 3열 레이아웃 ── */
+/* 데스크탑 1200px+: 좌(용도) | 중(입력) | 우(결과) */
+.three-col{display:grid;grid-template-columns:300px 300px 1fr;gap:13px;align-items:start;}
+/* 결과 미산정 시 2열처럼 좁히기 */
+@media(min-width:1200px){
+  .three-col:has(#resultPanel[style*="none"], #resultPanel:not([style])){
+    grid-template-columns:320px 320px;
+  }
+}
+/* 태블릿 768~1199px: 2열, 결과 full-width */
+@media(max-width:1199px) and (min-width:768px){
+  .three-col{grid-template-columns:1fr 1fr;gap:12px;}
+  .col-result{grid-column:1/-1;}
+}
+/* 모바일 767px 이하: 1열 */
+@media(max-width:767px){
+  .three-col{grid-template-columns:1fr;gap:10px;}
+}
 @media(hover:none) and (pointer:coarse){.btype-btn{min-height:56px;}.btn-g,.btn-b,.btn-exp{min-height:38px;}.finput,.fselect{min-height:40px;}}
 /* ── iOS zoom fix ── */
 @media screen and (max-width:768px){input,select,textarea{font-size:16px!important;}}
@@ -469,9 +489,10 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="step-item"><div class="sc" id="s4">4</div><span class="sl">결과 확인</span></div>
   </div>
 
-  <div class="two-col">
-    <!-- LEFT: 입력 -->
-    <div>
+  <div class="three-col">
+
+    <!-- ── 열1: 프로젝트 정보 + 건물 용도 선택 ── -->
+    <div class="col-info">
       <!-- 프로젝트 정보 -->
       <div class="card">
         <div class="card-head">
@@ -521,6 +542,10 @@ input[type="number"]{-moz-appearance:textfield;}
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ── 열2: 사용인원 + 온도 조건 + 산정 버튼 ── -->
+    <div class="col-input">
 
       <!-- 사용인원 -->
       <div class="card">
@@ -617,9 +642,10 @@ input[type="number"]{-moz-appearance:textfield;}
         ⚡ 급탕량 · 보일러 출력 자동 산정
       </button>
       <button class="reset-btn" onclick="resetAll()">↺ 초기화</button>
-    </div>
+    </div><!-- /col-input -->
 
-    <!-- RIGHT: 결과 -->
+    <!-- ── 열3: 결과 패널 (태블릿에서 full-width) ── -->
+    <div class="col-result">
     <div id="resultPanel">
       <!-- 결과 요약 -->
       <div class="card">
@@ -715,11 +741,10 @@ input[type="number"]{-moz-appearance:textfield;}
           · 급탕온도 기준: 60℃ 이하 (기술기준 2.2.7항)
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ TAB 2: 기준값 참조표 ══ -->
+    </div><!-- /noResultPanel -->
+    </div><!-- /col-result -->
+  </div><!-- /three-col -->
+</div><!-- /tab-calc -->
 <div id="tab-ref" class="tab-panel">
   <div class="card">
     <div class="card-head">
@@ -1900,3 +1925,4 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
+
