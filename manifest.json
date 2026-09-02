@@ -1,7 +1,7 @@
 {
-  "name": "급탕설비",
+  "name": "급탕량·보일러 출력 산정 시스템 · MANMIN Ver-5.0",
   "short_name": "급탕설비",
-  "description": "급탕량·보일러 출력 산정 시스템 — 기계설비 기술기준 별표5 · KDS 31 30 20",
+  "description": "건물 용도·사용인원·온도조건 기반 1일 최대급탕량 및 보일러 필요출력 자동 산정 — 기계설비 기술기준 국토교통부 고시 제2021-851호 별표5 · KDS 31 30 20 | ENGINEER KIM MANMIN",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

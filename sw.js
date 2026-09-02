@@ -22,7 +22,7 @@
       SW 가 아예 안 붙는다 → allSettled + 개별 catch 로 감쌌다(§11-3).
 ═══════════════════════════════════════════════════ */
 const PREFIX = 'geuptang-';
-const CACHE  = 'geuptang-v5.1.2';
+const CACHE  = 'geuptang-v5.1.3';   /* 2026-09-02 헤더 통일 */
 
 /* 2026-09-01 오업로드로 이 주소에 박힌 냉온배관 캐시 — 이번 배포에서 함께 지운다 */
 const ORPHAN = ['pipe-v5.0.0'];
