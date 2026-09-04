@@ -1,4 +1,5 @@
 /* ═══════════════════════════════════════════════════
+   S6 회차 2026-09-05 — R24①② 표 선 separate·mono 한글 폴백 소급 동반 캐시명 v5.1.8
    S5 회차 2026-09-04 — R23② JPG 엔진 행 나눔 소급 동반 캐시명 v5.1.7
    S3-0 회차 2026-09-04 — R27 html2canvas 클론 정화 동반 캐시명 v5.1.6
    S2 회차 2026-09-04 — index 소급(R1·R21·R26 등) 동반 캐시명 v5.1.5
@@ -39,7 +40,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'geuptang-v5.1.7';   /* 2026-09-02 헤더 통일 */
+const CACHE  = 'geuptang-v5.1.8';   /* 2026-09-02 헤더 통일 */
 
 /* 2026-09-01 오업로드로 이 주소에 박힌 냉온배관 캐시 — 이번 배포에서 함께 지운다 */
 const ORPHAN = ['pipe-v5.0.0'];
