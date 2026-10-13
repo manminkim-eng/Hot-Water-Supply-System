@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>급탕량·보일러 출력 산정 시스템 사용자 매뉴얼 Ver-5.0 · MANMIN</title>
+<meta name="description" content="급탕량·보일러 출력 산정 시스템 MANMIN Ver-5.0 사용자 매뉴얼 — 화면 기능, 기술기준(기계설비 기술기준 별표 5 · KDS 31 30 20), 실무 작업 방법">
+<meta name="author" content="김만민 건축사 · ㈜대성건축사사무소">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@700;900&display=swap">
+<link rel="stylesheet" href="./assets/fonts/manmin-fonts.css">
+<style>
+:root{
+  --navy:#2D3A8C;--navy-d:#1F2A6B;--navy-l:#E9ECF8;--accent:#F4A261;--accent-d:#C97A3A;--accent-l:#FDF1E7;
+  --bg:#F8F9FA;--card:#FFFFFF;--text:#1A1A2E;--text2:#4A4F66;--line:#DDE1EA;--ok:#0F766E;--ng:#B42318;
+  --r:12px;--pad:24px;--shadow:0 4px 20px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--navy)}a:hover{color:var(--accent-d)}
+code,kbd,.mono{font-family:var(--font-mono);font-size:.9em}
+code{background:var(--navy-l);color:var(--navy-d);padding:1px 6px;border-radius:5px}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#fff}
+/* 상단 */
+.top{background:linear-gradient(135deg,var(--navy-d),var(--navy));color:#fff}
+.top-in{max-width:1240px;margin:0 auto;padding:44px 24px 36px}
+.eyebrow{font-family:var(--font-brand);font-weight:700;font-size:12px;letter-spacing:.18em;opacity:.85}
+.top h1{font-size:28px;font-weight:900;margin:8px 0 6px;line-height:1.35}
+.top .sub{opacity:.9;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:13px}
+a.badge{color:#fff;text-decoration:none}a.badge:hover{background:rgba(255,255,255,.24);color:#fff}
+.badge.acc{background:var(--accent);border-color:var(--accent);color:#1A1A2E;font-weight:700}
+/* 레이아웃 */
+.wrap{max-width:1240px;margin:0 auto;padding:28px 24px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px}
+nav.toc{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 16px;font-size:14px}
+nav.toc h2{font-size:13px;letter-spacing:.12em;color:var(--text2);margin:0 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li a{display:block;padding:5px 8px;border-radius:8px;text-decoration:none;color:var(--text)}
+nav.toc li a:hover,nav.toc li a.on{background:var(--navy-l);color:var(--navy)}
+nav.toc li.sub a{padding-left:20px;font-size:13px;color:var(--text2)}
+main{min-width:0}
+section.ch{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:var(--pad) calc(var(--pad) + 8px);margin-bottom:28px}
+section.ch>h2{font-size:24px;font-weight:700;color:var(--navy);margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+section.ch>h2 .n{font-family:var(--font-brand);font-weight:700;font-size:14px;color:#fff;background:var(--navy);border-radius:8px;padding:2px 9px}
+section.ch>.lead{color:var(--text2);margin:0 0 18px}
+h3{font-size:19px;color:var(--navy-d);margin:34px 0 10px;padding-top:6px;border-top:1px solid var(--line)}
+h3:first-of-type{border-top:0}
+h4{font-size:16px;margin:22px 0 8px}
+p{margin:8px 0}
+ul,ol{padding-left:22px}
+.note,.tip,.warn{border-radius:10px;padding:12px 16px;margin:14px 0;font-size:15px}
+.note{background:var(--navy-l);border-left:4px solid var(--navy)}
+.tip{background:var(--accent-l);border-left:4px solid var(--accent)}
+.warn{background:#FEF3F2;border-left:4px solid var(--ng)}
+.note b:first-child,.tip b:first-child,.warn b:first-child{margin-right:6px}
+/* 표 */
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy-l);color:var(--navy-d);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--font-mono);white-space:nowrap}
+.ok{color:var(--ok);font-weight:700}.ng{color:var(--ng);font-weight:700}
+/* 그림 */
+figure.shot{margin:18px 0 26px}
+figure.shot .frame{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in}
+figure.shot img{display:block;width:100%;height:auto}
+figure.narrow{max-width:420px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--accent);color:#1A1A2E;font:700 13px/26px var(--font-mono);text-align:center;box-shadow:0 0 0 3px #fff,0 2px 8px rgba(0,0,0,.35);pointer-events:none}
+figcaption{font-size:14px;color:var(--text2);margin-top:8px}
+.fno{font-family:var(--font-mono);font-size:11px;background:var(--navy);color:#fff;border-radius:6px;padding:1px 7px;margin-right:8px}
+ol.legend{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 16px;font-size:14px}
+ol.legend li{display:flex;gap:8px;align-items:flex-start}
+ol.legend b{flex:0 0 22px;height:22px;border-radius:50%;background:var(--accent);font:700 12px/22px var(--font-mono);text-align:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+/* 단계 */
+.steps{counter-reset:st;list-style:none;padding:0;margin:16px 0}
+.steps>li{counter-increment:st;position:relative;padding:4px 0 18px 54px;border-left:2px solid var(--line);margin-left:18px}
+.steps>li:last-child{border-left-color:transparent}
+.steps>li::before{content:counter(st);position:absolute;left:-19px;top:0;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font:700 15px/36px var(--font-mono);text-align:center;box-shadow:0 0 0 4px var(--bg)}
+.steps>li>b.t{display:block;font-size:17px;color:var(--navy-d);margin-bottom:2px}
+/* 수식 */
+.eq{font-family:var(--font-mono);background:#0F1630;color:#E8ECFF;border-radius:10px;padding:14px 18px;margin:12px 0;overflow-x:auto;font-size:14px;line-height:1.9;white-space:pre}
+.eq .c{color:#9AA6D6}
+.svgbox{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;margin:14px 0;overflow-x:auto}
+.svgbox svg{display:block;width:100%;min-width:640px;height:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:16px;background:#fff}
+.card h5{margin:0 0 4px;font-size:15px;color:var(--navy)}
+.card p{margin:0;font-size:14px;color:var(--text2)}
+footer.foot{max-width:1240px;margin:0 auto;padding:0 24px 40px;color:var(--text2);font-size:13px}
+/* 라이트박스 */
+#lb{position:fixed;inset:0;background:rgba(10,14,30,.88);display:none;align-items:center;justify-content:center;z-index:99;cursor:zoom-out;padding:16px}
+#lb.open{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:8px;background:#fff}
+.totop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:0;font-size:18px;box-shadow:var(--shadow);cursor:pointer}
+/* 반응형 5단계 */
+@media (max-width:1240px){.wrap{grid-template-columns:230px minmax(0,1fr);gap:24px}}
+@media (max-width:1024px){.wrap{grid-template-columns:1fr}nav.toc{position:static;max-height:none}nav.toc ol{columns:2}}
+@media (max-width:760px){.pair{grid-template-columns:1fr}section.ch{padding:20px 18px}.top h1{font-size:24px}}
+@media (max-width:640px){nav.toc ol{columns:1}body{font-size:15px}}
+@media (max-width:480px){.wrap,.top-in{padding-left:16px;padding-right:16px}.pin{width:22px;height:22px;font-size:11px;line-height:22px}}
+@media (max-width:400px){section.ch>h2{font-size:20px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* A4 인쇄 */
+@page{size:A4;margin:14mm 12mm 14mm}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff;font-size:10.5pt}
+  nav.toc,.totop,#lb{display:none!important}
+  .wrap{display:block;padding:0}
+  section.ch{box-shadow:none;padding:0 0 8mm;margin:0;break-before:page}
+  main{padding-bottom:8mm}
+  section.ch:first-of-type{break-before:auto}
+  figure.shot,.tbl,.eq,.svgbox,.note,.tip,.warn,.steps>li{break-inside:avoid}
+  h3,h4{break-after:avoid}
+  .top{border-radius:0}
+  .pfoot{position:fixed;bottom:0;left:0;right:0;height:6mm;background:#fff;font-size:8pt;color:#666;border-top:1px solid #ccc;padding-top:1.5mm;display:flex;justify-content:space-between}
+}
+.pfoot{display:none}
+@media print{.pfoot{display:flex}}
+/* ── 좁은 화면 대응(r1 · 2026-10-12) : 화면 전용 — 인쇄·PDF에는 영향 없음 ── */
+@media screen and (max-width:640px){
+  .k1 td:first-child,.k1 th:first-child{white-space:normal}
+  /* 글 표(숫자 칸 없는 표) → 행마다 카드로 쌓기 */
+  .tbl.stack{border:0;border-radius:0;overflow:visible}
+  .tbl.stack table,.tbl.stack tbody,.tbl.stack tr,.tbl.stack td{display:block;width:auto}
+  .tbl.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tbl.stack table{background:transparent}
+  .tbl.stack tr{border:1px solid var(--line);border-radius:10px;background:#fff;margin:0 0 10px;overflow:hidden}
+  .tbl.stack td{border-bottom:1px solid var(--line);padding:8px 12px}
+  .tbl.stack tr td:last-child{border-bottom:0}
+  .tbl.stack td:first-child{background:var(--navy-l);color:var(--navy-d);font-weight:700}
+  .tbl.stack td[data-th]:not(:first-child)::before{content:attr(data-th);display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:2px}
+  .tbl.stack.c2 td[data-th]:not(:first-child)::before{display:none}
+  .tbl.stack td:empty{display:none}
+  /* 숫자 표 → 표 모양 유지, 글자·여백 축소, 넘치면 좌우로 밀기(오른쪽 그림자로 표시) */
+  .tbl:not(.stack){background:linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left/40px 100% no-repeat local,linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right/40px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(26,26,46,.22),transparent) right/12px 100% no-repeat scroll,#fff}
+  .tbl:not(.stack) table{font-size:13px;background:transparent}
+  .tbl:not(.stack) th,.tbl:not(.stack) td{padding:7px 8px}
+  /* 수식 → 줄바꿈 허용 */
+  .eq{white-space:pre-wrap;word-break:keep-all;font-size:13px;line-height:1.75;padding:12px 14px}
+  .eq .c{display:block;padding-left:1em}
+  .svgbox{position:relative}
+  .svgbox::after{content:"← 좌우로 밀어서 보기 →";display:block;text-align:center;font-size:12px;color:var(--text2);margin-top:6px;position:sticky;left:0}
+  ol.legend{grid-template-columns:1fr}
+  .steps>li{padding-left:34px;margin-left:14px}
+}
+.rev{white-space:nowrap}
+@media print{.rev{display:none}}
+</style>
+</head><body>
+<header class="top"><div class="top-in">
+<div class="eyebrow">MANMIN ENGINEERING · USER MANUAL</div>
+<h1>급탕량·보일러 출력 산정 시스템 사용자 매뉴얼</h1>
+<p class="sub">용도 · 인원 · 온도 → 1일 · 시간 최대 급탕량 → 보일러 필요 출력 → A4 산정서</p>
+<div class="badges"><span class="badge acc">매뉴얼 <span style="font-family:var(--font-brand)">Ver-5.0</span></span><a class="badge" href="../index.html">▶ 급탕량·보일러 출력 산정 시스템 열기</a><a class="badge" href="급탕_사용자매뉴얼_Ver-5.0.pdf" download>⤓ PDF</a><span class="badge">2026-10-13</span><span class="badge">김만민 건축사 · ㈜대성건축사사무소</span></div>
+</div></header>
+<div class="wrap"><nav class="toc" aria-label="목차"><h2>목차</h2><ol><li><a href="#ch0">0. 이 매뉴얼에 대하여</a></li><li><a href="#ch1">1. 한눈에 보기</a></li><li class="sub"><a href="#s1-1">화면 구성</a></li><li class="sub"><a href="#s1-2">작업 탭·근거 표시</a></li><li class="sub"><a href="#s1-3">설치·보관·매뉴얼</a></li><li><a href="#ch2">2. 1분 따라하기</a></li><li><a href="#ch3">3. 화면별 기능 상세</a></li><li class="sub"><a href="#s3-1">프로젝트 정보</a></li><li class="sub"><a href="#s3-2">건물 용도 선택</a></li><li class="sub"><a href="#s3-3">사용인원</a></li><li class="sub"><a href="#s3-4">온도 조건</a></li><li class="sub"><a href="#s3-5">산정 결과</a></li><li class="sub"><a href="#s3-6">상세 결과·산정식</a></li><li class="sub"><a href="#s3-7">기준값 참조표 탭</a></li><li class="sub"><a href="#s3-8">산정 공식 탭</a></li><li class="sub"><a href="#s3-9">사용 안내 창</a></li><li class="sub"><a href="#s3-10">A4 미리보기·출력</a></li><li class="sub"><a href="#s3-11">휴대전화 화면</a></li><li><a href="#ch4">4. 기술기준 해설</a></li><li class="sub"><a href="#s4-1">근거 체계</a></li><li class="sub"><a href="#s4-2">급탕 온도</a></li><li class="sub"><a href="#s4-3">급탕배관 길이·환탕</a></li><li class="sub"><a href="#s4-4">1일 급탕량 원단위</a></li><li class="sub"><a href="#s4-5">시간 최대 급탕량</a></li><li class="sub"><a href="#s4-6">보일러 출력</a></li><li class="sub"><a href="#s4-7">사용온도 환산</a></li><li class="sub"><a href="#s4-8">계산 범위·한계</a></li><li class="sub"><a href="#s4-9">v5.0.1 근거·계산 정정</a></li><li><a href="#ch5">5. 실무 작업 방법</a></li><li class="sub"><a href="#s5-1">단계별 절차</a></li><li class="sub"><a href="#s5-2">도면 반영 전 확인</a></li><li class="sub"><a href="#s5-3">예제 B — 사무소</a></li><li><a href="#ch6">6. 문제 해결·FAQ</a></li><li><a href="#ch7">부록</a></li><li class="sub"><a href="#a1">예제 입력값</a></li><li class="sub"><a href="#a2">용도별 원단위표</a></li><li class="sub"><a href="#a3">버전 변경 내역</a></li><li class="sub"><a href="#a4">용어</a></li></ol></nav><main><style>
+#fig-s03_project,#fig-s04_btype,#fig-s05_persons,#fig-s06_temp{max-width:380px}
+#fig-s07_summary,#fig-s08_hero,#fig-s09_detail,#fig-s10_result_b{max-width:540px}
+#fig-s16_a4page{max-width:560px}
+#fig-s13_modal,#fig-s14_modal_temp{max-width:600px}
+.k1 td:first-child,.k1 th:first-child{white-space:nowrap}
+@media (max-width:1240px){.eq{white-space:pre-wrap;word-break:keep-all}}
+.eq .c{display:block;margin-top:2px}
+.pair>div{min-width:0}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.tri{grid-template-columns:1fr}}
+@media print{
+  figure.shot{max-width:none!important}
+  figure.shot .frame{width:fit-content;max-width:100%}
+  figure.shot img{width:auto;height:auto;max-width:100%;max-height:118mm}
+  #fig-s16_a4page img,#fig-s09_detail img,#fig-s12_formula img,#fig-s06_temp img,#fig-s04_btype img{max-height:215mm}
+  figure.narrow img{max-height:105mm}
+  .pair{grid-template-columns:1fr 1fr}.tri{grid-template-columns:repeat(3,1fr)}
+  .brk .tbl{break-inside:auto}.brk tr{break-inside:avoid}.brk thead{display:table-header-group}
+}
+</style><section class="ch" id="ch0"><h2><span class="n">00</span>이 매뉴얼에 대하여</h2>
+<p class="lead">급탕량·보일러 출력 산정 시스템은 건물 용도 · 사용인원 · 온도 조건을 넣으면 <b>1일 최대 급탕량</b> · <b>시간 최대 급탕량</b> · <b>보일러 필요 출력</b>을 산정하고 A4 산정서를 만듭니다. 온도 · 배관 기준은 기계설비 기술기준 국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행) 별표 5와 KDS 31 30 20:2021 급탕설비를 따르고, 기준에 수치가 없는 용도별 원단위 · 시간최대계수 · 보일러 산정식은 <b>MANMIN 참고값</b>으로 표시합니다.</p>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">대상 프로그램</td><td class="">급탕량·보일러 출력 산정 시스템 <b>MANMIN Ver-5.0</b>(v5.0.2) — 탭 막대 「📘 매뉴얼」 버튼으로 이 문서가 열립니다</td></tr><tr><td class="">접속 주소</td><td class=""><a href="https://manminkim-eng.github.io/Hot-Water-Supply-System/" target="_blank" rel="noopener">manminkim-eng.github.io/Hot-Water-Supply-System</a></td></tr><tr><td class="">매뉴얼 판</td><td class=""><b>Ver-5.0</b> (화면 표기와 같은 판 번호, 초판) · 2026-10-13 · 작성 김만민 건축사(㈜대성건축사사무소)</td></tr><tr><td class="">내려받기</td><td class=""><a href="급탕_사용자매뉴얼_Ver-5.0.pdf" download>PDF(A4)</a> · <a href="../index.html">급탕량·보일러 출력 산정 시스템 열기</a></td></tr><tr><td class="">예제</td><td class="">본문 그림은 예제 A(공동주택 · 거주자 300명 · 16 h · 60 / 10 / 42℃ · 효율 90 % · 여유율 20 %)로 캡처했습니다. 결과 1일 <b>36,000 L</b> · 시간 최대 <b>3,375 L/h</b> · 보일러 <b>261.6 kW</b>. 예제 B(사무소 100명 → 21.8 kW)는 <a href="#s5-3">5-3</a></td></tr><tr><td class="">근거 기준</td><td class="">기계설비 기술기준 국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행) 별표 5 2.2 / KDS 31 30 20:2021 급탕설비 1.6 · 4.1 — 국토교통부고시 제2026-92호(2026. 3. 1. 시행, 현행) 첨부 원문과 대조(2026-10-13)</td></tr><tr><td class="">읽는 순서</td><td class="">처음이면 1장 → 2장(따라하기) → 필요할 때 3장(화면별 상세). 장비 선정 전에는 4장(기술기준) · 5장(작업 방법)</td></tr></tbody></table></div></div>
+<div class="note"><b>표기</b>그림 위 주황색 번호(①②…)는 그림 아래 범례 번호와 같습니다. 그림을 누르면 크게 볼 수 있습니다. 「L/인·일」은 사용자 1명이 하루에 쓰는 60℃ 급탕량, 「K<sub>h</sub>」는 시간최대계수입니다.</div>
+<div class="warn"><b>책임 한계</b>기계설비 기술기준 별표 5와 KDS 31 30 20:2021 급탕설비에는 <b>용도별 1인 1일 급탕량 · 시간최대계수 · 보일러 출력 산정식이 없습니다</b>. 이 값들은 설비 설계 편람 계열 자료를 정리한 MANMIN 참고값입니다. 저탕조 용량 · 배관 열손실 · 순환펌프 · 급탕관 지름(급탕부하단위 FU)은 계산하지 않습니다(<a href="#s4-8">4-8</a>). 최종 용량은 설계자가 판단합니다.</div>
+</section>
+<section class="ch" id="ch1"><h2><span class="n">01</span>한눈에 보기</h2>
+<p class="lead">설치 없이 브라우저에서 바로 실행되는 단일 페이지 앱(PWA)입니다. 입력한 내용은 내 PC 브라우저 안에서만 계산되며 서버로 전송되지 않습니다.</p>
+<div class="cards">
+<div class="card"><h5>무엇을 산정하나</h5><p>1일 · 시간 · 분 최대 급탕량과 보일러(급탕 가열장치) 필요 출력</p></div>
+<div class="card"><h5>용도</h5><p>호텔 · 병원 · 사무소 · 공동주택 · 학교 · 음식점 · 공장 · 체육 · 미용 · 유치원 · 기숙사 · 직접 입력</p></div>
+<div class="card"><h5>근거</h5><p>기계설비 기술기준 별표 5 · KDS 31 30 20:2021 급탕설비 · 원단위는 MANMIN 참고값</p></div>
+</div>
+<h3 id="s1-1">1-1. 화면 구성</h3>
+<figure class="shot" id="fig-s01_overview"><div class="frame"><img src="images/s01_overview.webp" width="1440" height="900" loading="lazy" alt="전체 화면 — 급탕량 · 출력 산정 탭(예제 A)"><span class="pin" style="left:5.26%;top:13.49%">1</span><span class="pin" style="left:5.26%;top:19.93%">2</span><span class="pin" style="left:6.16%;top:24.49%">3</span><span class="pin" style="left:6.16%;top:32.58%">4</span><span class="pin" style="left:6.16%;top:55.24%">5</span><span class="pin" style="left:27.90%;top:32.58%">6</span><span class="pin" style="left:27.90%;top:60.48%">7</span><span class="pin" style="left:49.64%;top:32.58%">8</span><span class="pin" style="left:94.57%;top:85.69%">9</span></div><figcaption><span class="fno">S01</span>전체 화면 — 급탕량 · 출력 산정 탭(예제 A)</figcaption><ol class="legend"><li><b>1</b><span>작업 탭: 급탕량 · 출력 산정 · 기준값 참조표 · 산정 공식 · A4 미리보기 · 매뉴얼</span></li><li><b>2</b><span>요약 스트립: 용도 · 인원 · 1일 급탕량 · 시간 최대 · 보일러 출력</span></li><li><b>3</b><span>진행 단계: 용도 선택 → 사용인원 → 온도 조건 → 결과 확인</span></li><li><b>4</b><span>프로젝트 정보</span></li><li><b>5</b><span>STEP 1 건물 용도 선택</span></li><li><b>6</b><span>STEP 2 사용인원 입력</span></li><li><b>7</b><span>STEP 3 온도 조건</span></li><li><b>8</b><span>산정 결과 — 입력 요약 · 급탕량 · 보일러 출력</span></li><li><b>9</b><span>오른쪽 아래 「초기화」 · 「사용 안내」</span></li></ol></figure>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">영역</th><th class="">내용</th></tr></thead><tbody><tr><td class="">왼쪽 — 공사 · 용도</td><td class="">프로젝트 정보 → STEP 1 용도 버튼(1인 1일 급탕량 표시)</td></tr><tr><td class="">가운데 — 입력</td><td class="">STEP 2 사용인원 · 일 사용시간 → STEP 3 급탕 · 급수 · 사용 온도 · 보일러 효율 · 여유율 → 「⚡ 급탕량 · 보일러 출력 자동 산정」</td></tr><tr><td class="">오른쪽 — 결과</td><td class="">입력 요약 → 1일 최대 급탕량(큰 숫자) → 시간 · 분 최대 → 보일러 필요 출력 → 상세 결과표 → 적용 산정식</td></tr></tbody></table></div></div>
+<h3 id="s1-2">1-2. 작업 탭·근거 표시</h3>
+<figure class="shot" id="fig-s02_tabs"><div class="frame"><img src="images/s02_tabs.webp" width="1440" height="186" loading="lazy" alt="헤더 — 작업 탭과 근거 표시"><span class="pin" style="left:6.82%;top:66.48%">1</span><span class="pin" style="left:16.46%;top:66.48%">2</span><span class="pin" style="left:25.05%;top:66.48%">3</span><span class="pin" style="left:32.07%;top:66.48%">4</span><span class="pin" style="left:86.45%;top:66.48%">5</span><span class="pin" style="left:80.99%;top:13.74%">6</span></div><figcaption><span class="fno">S02</span>헤더 — 작업 탭과 근거 표시</figcaption><ol class="legend"><li><b>1</b><span>급탕량 · 출력 산정</span></li><li><b>2</b><span>기준값 참조표 — 용도별 원단위(MANMIN 참고값)</span></li><li><b>3</b><span>산정 공식 — 계산식 · 설계 주요 규정</span></li><li><b>4</b><span>A4 미리보기 — 산정서 · 인쇄 · JPG</span></li><li><b>5</b><span>매뉴얼(이 문서)</span></li><li><b>6</b><span>근거: 기술기준 별표 5 · 고시 제2021-851호 · 제2026-360호 · KDS 31 30 20:2021</span></li></ol></figure>
+<h3 id="s1-3">1-3. 설치·보관·매뉴얼</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">설치</td><td class="">주소창의 설치 아이콘 또는 휴대전화 「홈 화면에 추가」로 앱처럼 쓸 수 있습니다. 한 번 연 뒤에는 인터넷 없이도 계산됩니다</td></tr><tr><td class="">결과 보관</td><td class="">문서로 남기려면 A4 산정서(PDF · JPG)를 쓰십시오. 공사명 · 작성자는 초기화해도 남습니다</td></tr><tr><td class="">매뉴얼</td><td class="">탭 막대 오른쪽 끝 「📘 매뉴얼」 — 인터넷 연결 시 새 창으로 열립니다. 좁은 화면에서는 탭 막대를 좌우로 밀면 보입니다</td></tr><tr><td class="">업데이트</td><td class="">새 버전이 올라오면 다음 접속 때 자동으로 바뀝니다. 화면이 예전 그대로면 새로 고침(Ctrl+F5)</td></tr></tbody></table></div></div>
+</section>
+<section class="ch" id="ch2"><h2><span class="n">02</span>1분 따라하기</h2>
+<p class="lead">예제 A로 6단계를 따라 하면 공동주택 거주자 300명의 보일러 필요 출력 <b>261.6 kW</b>가 나옵니다.</p>
+<ol class="steps">
+<li><b class="t">① 용도 선택</b>프로젝트 정보에 공사명 · 작성자 · 작성일을 넣고, STEP 1에서 「🏠 공동주택」을 누릅니다. 1인 1일 급탕량 120 L(60℃, MANMIN 참고값)과 일 사용시간 16 h가 채워집니다(<a href="#s3-2">3-2</a>).</li>
+<li><b class="t">② 사용인원</b>STEP 2에 총 사용인원 300을 넣습니다(<a href="#s3-3">3-3</a>).</li>
+<li><b class="t">③ 온도 조건</b>STEP 3에서 급탕 60℃ · 급수 10℃ · 사용 42℃, 보일러 효율 90 %, 여유율 20 %를 확인하고 「⚡ 급탕량 · 보일러 출력 자동 산정」을 누릅니다(<a href="#s3-4">3-4</a>).</li>
+<li><b class="t">④ 산정 결과</b>1일 36,000 L → 시간 최대 3,375 L/h → 보일러 필요 출력 <b>261.6 kW</b>(<a href="#s3-5">3-5</a>).</li>
+<li><b class="t">⑤ 산정식 확인</b>상세 결과표와 「적용 산정식」 상자에서 계산 과정을 숫자로 확인합니다(<a href="#s3-6">3-6</a>).</li>
+<li><b class="t">⑥ A4 산정서</b>「📄 A4 미리보기」에서 「🖨️ 인쇄 / PDF」 또는 「🖼️ JPG 저장」으로 산정서를 남깁니다(<a href="#s3-10">3-10</a>).</li>
+</ol>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 A 결과</th></tr></thead><tbody><tr><td class="">1일 최대 급탕량(60℃)</td><td class="">300명 × 120 L/인·일 = <b>36,000 L/day</b></td></tr><tr><td class="">시간 최대 급탕량</td><td class="">36,000 × K<sub>h</sub> 1.5 ÷ 16 h = <b>3,375 L/h</b> (56.25 L/min)</td></tr><tr><td class="">보일러 열량</td><td class="">3,375 × (60 − 10) ÷ 0.9 = 187,500 kcal/h = 218.02 kW</td></tr><tr><td class="">보일러 필요 출력</td><td class="">218.02 × (1 + 20 %) = <b>261.6 kW</b> (225 Mcal/h)</td></tr><tr><td class="">사용온도(42℃) 환산 1일량</td><td class="">× (60 − 10) ÷ (42 − 10) = 1.5625 → 56,250 L/day(참고)</td></tr></tbody></table></div></div>
+<div class="tip"><b>확인</b>따라 한 결과가 위 표와 같으면 준비가 끝난 것입니다. v5.0.1부터는 1일 급탕량에 동시사용률을 곱하지 않습니다 — 예전 판(70 % 적용) 결과보다 1/0.7 ≈ 1.43배 큽니다(<a href="#s4-9">4-9</a>).</div>
+</section>
+<section class="ch" id="ch3"><h2><span class="n">03</span>화면별 기능 상세</h2>
+<h3 id="s3-1">3-1. 프로젝트 정보</h3>
+<figure class="shot" id="fig-s03_project"><div class="frame"><img src="images/s03_project.webp" width="324" height="216" loading="lazy" alt="프로젝트 정보 — A4 산정서 표제"><span class="pin" style="left:8.42%;top:44.20%">1</span><span class="pin" style="left:8.42%;top:73.83%">2</span><span class="pin" style="left:49.94%;top:73.83%">3</span></div><figcaption><span class="fno">S03</span>프로젝트 정보 — A4 산정서 표제</figcaption><ol class="legend"><li><b>1</b><span>공사명</span></li><li><b>2</b><span>작성자</span></li><li><b>3</b><span>작성일</span></li></ol></figure>
+<h3 id="s3-2">3-2. 건물 용도 선택 (STEP 1)</h3>
+<figure class="shot" id="fig-s04_btype"><div class="frame"><img src="images/s04_btype.webp" width="324" height="538" loading="lazy" alt="STEP 1 — 건물 용도 선택"><span class="pin" style="left:8.42%;top:31.78%">1</span><span class="pin" style="left:8.42%;top:43.52%">2</span><span class="pin" style="left:8.42%;top:89.08%">3</span></div><figcaption><span class="fno">S04</span>STEP 1 — 건물 용도 선택</figcaption><ol class="legend"><li><b>1</b><span>용도 12종(직접 입력 포함)</span></li><li><b>2</b><span>선택한 용도</span></li><li><b>3</b><span>선택 용도 · 1인 1일 급탕량</span></li></ol></figure>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">용도 버튼</td><td class="">버튼마다 1인 1일 급탕량(60℃, L/인·일)이 적혀 있습니다. 누르면 STEP 2의 일 사용시간이 용도 표준값으로 채워집니다</td></tr><tr><td class="">원단위의 근거</td><td class="">기술기준 별표 5 · KDS 31 30 20:2021에는 용도별 급탕량 수치가 없습니다 — MANMIN 참고값(<a href="#s4-4">4-4</a>)</td></tr><tr><td class="">직접 입력</td><td class="">「✏️ 직접 입력」을 누르면 1인 1일 급탕량 입력란이 나타납니다(60℃ 기준)</td></tr></tbody></table></div></div>
+<h3 id="s3-3">3-3. 사용인원 (STEP 2)</h3>
+<figure class="shot" id="fig-s05_persons"><div class="frame"><img src="images/s05_persons.webp" width="324" height="263" loading="lazy" alt="STEP 2 — 사용인원 입력"><span class="pin" style="left:8.42%;top:34.62%">1</span><span class="pin" style="left:51.63%;top:34.62%">2</span><span class="pin" style="left:8.42%;top:54.30%">3</span></div><figcaption><span class="fno">S05</span>STEP 2 — 사용인원 입력</figcaption><ol class="legend"><li><b>1</b><span>총 사용인원</span></li><li><b>2</b><span>일 사용시간(용도별 자동, 수정 가능)</span></li><li><b>3</b><span>1일 급탕량 · 피크 안내</span></li></ol></figure>
+<p>1일 급탕량 = 사용인원 × 1인 1일 급탕량입니다. 피크는 시간최대계수 K<sub>h</sub> 1.5로만 반영하며, 동시사용률은 곱하지 않습니다.</p>
+<h3 id="s3-4">3-4. 온도 조건 (STEP 3)</h3>
+<figure class="shot" id="fig-s06_temp"><div class="frame"><img src="images/s06_temp.webp" width="324" height="550" loading="lazy" alt="STEP 3 — 온도 조건 · 효율 · 여유율"><span class="pin" style="left:8.42%;top:16.99%">1</span><span class="pin" style="left:37.23%;top:16.99%">2</span><span class="pin" style="left:66.03%;top:16.99%">3</span><span class="pin" style="left:8.42%;top:27.56%">4</span><span class="pin" style="left:8.42%;top:60.41%">5</span><span class="pin" style="left:8.42%;top:72.05%">6</span><span class="pin" style="left:4.10%;top:83.52%">7</span><span class="pin" style="left:4.10%;top:92.43%">8</span></div><figcaption><span class="fno">S06</span>STEP 3 — 온도 조건 · 효율 · 여유율</figcaption><ol class="legend"><li><b>1</b><span>급탕 온도(60℃ 초과 입력 불가)</span></li><li><b>2</b><span>급수 온도</span></li><li><b>3</b><span>사용 온도</span></li><li><b>4</b><span>기준 규정 — 55~60℃ · 43℃ · 60℃ 제한</span></li><li><b>5</b><span>보일러 효율</span></li><li><b>6</b><span>여유율</span></li><li><b>7</b><span>⚡ 자동 산정</span></li><li><b>8</b><span>초기화</span></li></ol></figure>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">급탕 온도</td><td class="">급탕배관 급탕온도는 55~60℃로 유지할 수 있게 합니다(KDS 31 30 20 1.6.9 — 레지오넬라균 방지). 60℃를 넘기면 산정하지 않고 안내합니다</td></tr><tr><td class="">사용 온도</td><td class="">위생기구 급탕온도는 43℃ 이하로 제한할 수 있어야 합니다(별표 5 2.2.7(2)). 이 값은 사용온도 환산 참고값에만 쓰입니다</td></tr><tr><td class="">급수 온도</td><td class="">0℃를 넣으면 0℃로 계산합니다(v5.0.1부터 빈칸만 기본값 10℃)</td></tr><tr><td class="">효율 · 여유율</td><td class="">효율로 열량을 나누고 여유율을 곱해 필요 출력을 구합니다. 여유율 0 %도 그대로 계산합니다</td></tr></tbody></table></div></div>
+<h3 id="s3-5">3-5. 산정 결과</h3>
+<figure class="shot" id="fig-s07_summary"><div class="frame"><img src="images/s07_summary.webp" width="672" height="300" loading="lazy" alt="산정 입력 요약 — 예제 A"><span class="pin" style="left:86.97%;top:22.47%">1</span><span class="pin" style="left:79.66%;top:41.80%">2</span><span class="pin" style="left:80.21%;top:60.80%">3</span><span class="pin" style="left:79.92%;top:70.47%">4</span></div><figcaption><span class="fno">S07</span>산정 입력 요약 — 예제 A</figcaption><ol class="legend"><li><b>1</b><span>건물 용도</span></li><li><b>2</b><span>1인 1일 급탕량</span></li><li><b>3</b><span>시간최대계수 K_h(MANMIN 참고)</span></li><li><b>4</b><span>급탕 / 급수 / 사용온도</span></li></ol></figure>
+<figure class="shot" id="fig-s08_hero"><div class="frame"><img src="images/s08_hero.webp" width="672" height="378" loading="lazy" alt="급탕량 · 보일러 출력 — 예제 A"><span class="pin" style="left:2.19%;top:6.17%">1</span><span class="pin" style="left:2.19%;top:42.15%">2</span><span class="pin" style="left:51.14%;top:42.15%">3</span><span class="pin" style="left:2.19%;top:67.02%">4</span></div><figcaption><span class="fno">S08</span>급탕량 · 보일러 출력 — 예제 A</figcaption><ol class="legend"><li><b>1</b><span>1일 최대 급탕량</span></li><li><b>2</b><span>시간 최대 급탕량</span></li><li><b>3</b><span>분 최대 급탕량</span></li><li><b>4</b><span>보일러 필요 출력(여유율 포함)</span></li></ol></figure>
+<h3 id="s3-6">3-6. 상세 결과·산정식</h3>
+<figure class="shot" id="fig-s09_detail"><div class="frame"><img src="images/s09_detail.webp" width="672" height="721" loading="lazy" alt="상세 산정 결과 · 산정 기준 · 적용 산정식"><span class="pin" style="left:4.34%;top:16.66%">1</span><span class="pin" style="left:4.27%;top:61.27%">2</span><span class="pin" style="left:4.27%;top:83.34%">3</span></div><figcaption><span class="fno">S09</span>상세 산정 결과 · 산정 기준 · 적용 산정식</figcaption><ol class="legend"><li><b>1</b><span>상세 산정 결과</span></li><li><b>2</b><span>산정 기준 — 온도 · 배관 / MANMIN 참고값 구분</span></li><li><b>3</b><span>적용 산정식 — 숫자를 넣은 식</span></li></ol></figure>
+<h3 id="s3-7">3-7. 기준값 참조표 탭</h3>
+<figure class="shot" id="fig-s11_ref"><div class="frame"><img src="images/s11_ref.webp" width="1298" height="599" loading="lazy" alt="건물 용도별 1일 급탕 사용량 기준표(MANMIN 참고값)"><span class="pin" style="left:2.40%;top:12.65%">1</span><span class="pin" style="left:2.44%;top:32.69%">2</span><span class="pin" style="left:2.40%;top:82.14%">3</span></div><figcaption><span class="fno">S11</span>건물 용도별 1일 급탕 사용량 기준표(MANMIN 참고값)</figcaption><ol class="legend"><li><b>1</b><span>MANMIN 참고값 안내</span></li><li><b>2</b><span>용도 · 단위 · 급탕량 · 사용시간 · 비고</span></li><li><b>3</b><span>온도 환산</span></li></ol></figure>
+<h3 id="s3-8">3-8. 산정 공식 탭</h3>
+<figure class="shot" id="fig-s12_formula"><div class="frame"><img src="images/s12_formula.webp" width="1298" height="1153" loading="lazy" alt="급탕량 및 보일러 출력 산정 공식 · 설계 주요 규정"></div><figcaption><span class="fno">S12</span>급탕량 및 보일러 출력 산정 공식 · 설계 주요 규정</figcaption></figure>
+<h3 id="s3-9">3-9. 사용 안내 창</h3>
+<div class="pair"><div><figure class="shot" id="fig-s13_modal"><div class="frame"><img src="images/s13_modal.webp" width="684" height="744" loading="lazy" alt="오른쪽 아래 「사용 안내」 — 웹 사용법"></div><figcaption><span class="fno">S13</span>오른쪽 아래 「사용 안내」 — 웹 사용법</figcaption></figure></div><div><figure class="shot" id="fig-s14_modal_temp"><div class="frame"><img src="images/s14_modal_temp.webp" width="684" height="552" loading="lazy" alt="온도 · 계수 탭"></div><figcaption><span class="fno">S14</span>온도 · 계수 탭</figcaption></figure></div></div>
+<h3 id="s3-10">3-10. A4 미리보기·출력</h3>
+<figure class="shot" id="fig-s15_a4"><div class="frame"><img src="images/s15_a4.webp" width="1440" height="900" loading="lazy" alt="A4 미리보기 탭"><span class="pin" style="left:11.87%;top:25.60%">1</span><span class="pin" style="left:19.59%;top:25.60%">2</span><span class="pin" style="left:22.83%;top:35.91%">3</span></div><figcaption><span class="fno">S15</span>A4 미리보기 탭</figcaption><ol class="legend"><li><b>1</b><span>인쇄 / PDF</span></li><li><b>2</b><span>JPG 저장</span></li><li><b>3</b><span>A4 산정서</span></li></ol></figure>
+<figure class="shot" id="fig-s16_a4page"><div class="frame"><img src="images/s16_a4page.webp" width="818" height="1146" loading="lazy" alt="A4 급탕량 · 보일러 출력 산정서 — 예제 A"><span class="pin" style="left:8.35%;top:11.27%">1</span><span class="pin" style="left:8.35%;top:37.49%">2</span><span class="pin" style="left:8.35%;top:46.48%">3</span><span class="pin" style="left:8.35%;top:71.13%">4</span></div><figcaption><span class="fno">S16</span>A4 급탕량 · 보일러 출력 산정서 — 예제 A</figcaption><ol class="legend"><li><b>1</b><span>1. 설계 개요</span></li><li><b>2</b><span>2. 주요 산정 결과</span></li><li><b>3</b><span>3. 상세 산정 계산서</span></li><li><b>4</b><span>4. 설계 기준 적합성 검토</span></li></ol></figure>
+<p>「4. 설계 기준 적합성 검토」는 급탕 온도 55~60℃(KDS 1.6.9) · 사용온도 43℃ 이하(별표 5 2.2.7(2))를 자동 판정하고, 배관 길이 15 m · 환탕 방식은 「확인」으로 표시합니다.</p>
+<h3 id="s3-11">3-11. 휴대전화 화면</h3>
+<div class="tri"><div><figure class="shot narrow" id="fig-s17_mobile_main"><div class="frame"><img src="images/s17_mobile_main.webp" width="390" height="844" loading="lazy" alt="입력"></div><figcaption><span class="fno">S17</span>입력</figcaption></figure></div><div><figure class="shot narrow" id="fig-s18_mobile_result"><div class="frame"><img src="images/s18_mobile_result.webp" width="390" height="844" loading="lazy" alt="결과"></div><figcaption><span class="fno">S18</span>결과</figcaption></figure></div><div><figure class="shot narrow" id="fig-s19_mobile_a4"><div class="frame"><img src="images/s19_mobile_a4.webp" width="390" height="844" loading="lazy" alt="A4 미리보기"></div><figcaption><span class="fno">S19</span>A4 미리보기</figcaption></figure></div></div>
+<p>좁은 화면에서는 프로젝트 → 용도 → 입력 → 결과가 한 줄로 쌓입니다. 탭 막대는 다른 MANMIN 도구와 같이 한 줄이며 좌우로 밀어 「매뉴얼」까지 볼 수 있습니다.</p>
+</section>
+<section class="ch" id="ch4"><h2><span class="n">04</span>기술기준 해설</h2>
+<h3 id="s4-1">4-1. 근거 체계</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">근거</th><th class="">내용</th></tr></thead><tbody><tr><td class="">KDS 31 30 20 1.6.9</td><td class="">급탕배관 내 급탕온도는 레지오넬라균 서식을 방지하기 위해 <b>55~60℃</b>로 유지할 수 있게 함</td></tr><tr><td class="">별표 5 2.2.7(2) · KDS 4.6.2</td><td class="">온도제한장치나 혼합장치로 위생기구 급탕온도를 <b>43℃ 이하</b>로 제한할 수 있어야 함</td></tr><tr><td class="">별표 5 2.2.3(1) · 2.2.5(3)</td><td class="">난방겸용 급탕가열장치는 온도조절밸브로 급탕배관 60℃ 이하 제한 · 순간 급탕가열장치는 60℃ 이하로 설정할 수 있어야 함</td></tr><tr><td class="">별표 5 2.2.2(3) · KDS 4.1.4</td><td class="">급탕열원에서 급탕 위생기구까지 배관길이 <b>15 m 이하</b> — 환탕배관과 가열관은 급탕열원으로 간주</td></tr><tr><td class="">별표 5 2.2.1(6) · KDS 1.6.6</td><td class="">중앙급탕방식은 환탕배관 · 급탕순환펌프 설계 — KDS는 배관거리 30 m 이상에 환탕관 · 순환펌프 또는 급탕관 가열장치</td></tr><tr><td class="">MANMIN 참고값</td><td class="">1인 1일 급탕량 · 일 사용시간 · K<sub>h</sub> · 보일러 산정식 — 기준에 수치 없음</td></tr></tbody></table></div></div>
+<p class="mono" style="font-size:13px;color:var(--text2)">기계설비 기술기준 국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행) · KDS 31 30 20:2021 급탕설비(2021.2.19. 개정) — 국토교통부고시 제2026-92호(2026. 3. 1. 시행, 현행) 첨부 전문</p>
+<h3 id="s4-2">4-2. 급탕 온도</h3>
+<p>급탕배관은 55~60℃로 유지하고(레지오넬라 방지), 위생기구에서는 혼합장치 등으로 43℃ 이하로 낮춥니다. 위생기구 최대 온도를 급탕가열장치의 온도조절기로 제한해서는 안 됩니다(별표 5 2.2.7(1)). 예전 판의 「60℃ 이하 — 기술기준 2.2.7」 · 「저장온도 60℃ 이상」 문구는 원문과 달라 v5.0.1에서 고쳤습니다.</p>
+<h3 id="s4-3">4-3. 급탕배관 길이·환탕</h3>
+<p>15 m는 급탕열원에서 위생기구까지의 최대 배관길이입니다. 이를 넘는 계통은 환탕관 · 가열관을 설치해 그 지점을 열원으로 간주할 수 있게 합니다. 환탕 유량은 배관 열손실로 구합니다(KDS 4.1.2 — Q = q ÷ (ρ · C<sub>p</sub> · Δt), 허용 온도차 공동주택 5 K 이하 · 그 외 5~10 K, 열손실은 배관 길이 × 30 W/m로 계산할 수도 있음). 이 앱은 환탕 유량은 계산하지 않습니다.</p>
+<h3 id="s4-4">4-4. 1일 급탕량 원단위 (MANMIN 참고값)</h3>
+<div class="brk"><div class="tbl"><table><thead><tr><th class="">용도</th><th class="">단위</th><th class="num">L/인·일(60℃)</th><th class="num">사용시간 h</th></tr></thead><tbody><tr><td class="">호텔·리조트</td><td class="">투숙객</td><td class="num">200</td><td class="num">24</td></tr><tr><td class="">병원·의원</td><td class="">입원환자</td><td class="num">150</td><td class="num">24</td></tr><tr><td class="">사무소</td><td class="">재실자</td><td class="num">15</td><td class="num">8</td></tr><tr><td class="">공동주택</td><td class="">거주자</td><td class="num">120</td><td class="num">16</td></tr><tr><td class="">학교</td><td class="">학생</td><td class="num">10</td><td class="num">8</td></tr><tr><td class="">음식점</td><td class="">종업원</td><td class="num">20</td><td class="num">12</td></tr><tr><td class="">공장·작업장</td><td class="">작업자</td><td class="num">45</td><td class="num">8</td></tr><tr><td class="">체육·스포츠</td><td class="">이용자</td><td class="num">60</td><td class="num">12</td></tr><tr><td class="">미용·목욕</td><td class="">고객</td><td class="num">100</td><td class="num">12</td></tr><tr><td class="">유치원·어린이집</td><td class="">원아</td><td class="num">15</td><td class="num">8</td></tr><tr><td class="">기숙사·연수원</td><td class="">거주자</td><td class="num">100</td><td class="num">16</td></tr></tbody></table></div></div>
+<div class="note"><b>근거</b>기계설비 기술기준 별표 5 · KDS 31 30 20:2021(및 KDS 31 30 05 · 10 · 15)에는 용도별 급탕량 수치가 없습니다. 설비 설계 편람 계열 자료를 정리한 값이며, 건물 특성(객실 구성 · 샤워 설비 · 식당 유무)에 맞춰 「직접 입력」으로 바꿔 쓰십시오.</div>
+<h3 id="s4-5">4-5. 시간 최대 급탕량</h3>
+<div class="eq">Q<sub>h</sub> = Q<sub>day</sub> × K<sub>h</sub> ÷ T &nbsp;→&nbsp; 36,000 × 1.5 ÷ 16 = 3,375 L/h<span class="c">K<sub>h</sub> 시간최대계수 1.5(MANMIN 참고값, 일반 범위 1.5~2.0) · T 일 사용시간</span></div>
+<h3 id="s4-6">4-6. 보일러 출력</h3>
+<div class="eq">H = Q<sub>h</sub> × ρ × C<sub>p</sub> × (T<sub>hot</sub> − T<sub>cold</sub>) ÷ η &nbsp;→&nbsp; 3,375 × 1 × 1 × 50 ÷ 0.9 = 187,500 kcal/h<span class="c">물 1 kg/L · 1 kcal/kg·℃ · 1 kW = 860 kcal/h</span></div>
+<div class="eq">P = 187,500 ÷ 860 × (1 + 0.2) = 261.6 kW<span class="c">여유율 α — 배관 열손실 · 예비 용량</span></div>
+<p>시간 최대 급탕량을 그대로 가열할 수 있는 용량(저탕 없는 순간식에 가까운 계산)입니다. 저탕조를 두면 가열능력을 줄일 수 있으나, 저탕 용량과 가열능력의 조합은 이 앱이 계산하지 않습니다.</p>
+<h3 id="s4-7">4-7. 사용온도 환산</h3>
+<div class="eq">Q<sub>use</sub> = Q<sub>60</sub> × (T<sub>hot</sub> − T<sub>cold</sub>) ÷ (T<sub>use</sub> − T<sub>cold</sub>) &nbsp;→&nbsp; × 1.5625<span class="c">60℃ 급탕을 42℃로 섞어 쓸 때의 양(참고) — 보일러 출력에는 쓰지 않음</span></div>
+<h3 id="s4-8">4-8. 계산 범위·한계</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">내용</th></tr></thead><tbody><tr><td class="">계산하는 것</td><td class="">1일 · 시간 · 분 최대 급탕량, 보일러 열량 · 필요 출력, 사용온도 환산량</td></tr><tr><td class="">계산하지 않는 것</td><td class="">저탕조 용량 · 저탕 가열 조합, 급탕관 지름(급탕부하단위 FU — 별표 8 2.5), 환탕 유량 · 순환펌프 양정(KDS 4.1.2 · 4.5), 팽창탱크, 배관 열손실</td></tr><tr><td class="">원단위</td><td class="">용도별 대표값 1개 — 실제 사용 패턴과 다를 수 있음</td></tr></tbody></table></div></div>
+<h3 id="s4-9">4-9. v5.0.1 근거·계산 정정 (2026-10-13)</h3>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">기존</th><th class="">정정</th></tr></thead><tbody><tr><td class="">원단위 출처</td><td class="">「KDS 31 30 20 · 기술기준 별표5」</td><td class="">MANMIN 참고값 — 기준에 수치 없음</td></tr><tr><td class="">60℃ 상한</td><td class="">「기술기준 2.2.7」</td><td class="">KDS 1.6.9(55~60℃) · 별표 5 2.2.3(1) · 2.2.5(3) / 43℃는 2.2.7(2)</td></tr><tr><td class="">레지오넬라</td><td class="">「저장온도 60℃ 이상」(같은 화면의 「60℃ 이하」와 상충)</td><td class="">급탕배관 55~60℃ 유지</td></tr><tr><td class="">15 m</td><td class="">「환탕 배관 15m 기준」 · 「15m 초과 시 환탕 의무」</td><td class="">급탕열원 → 위생기구 15 m 이하 · 환탕은 2.2.1(6) · KDS 1.6.6(30 m)</td></tr><tr><td class="">동시사용률</td><td class="">1일 급탕량 × 70 %</td><td class="">삭제 — Q<sub>day</sub> = N × q(결과 약 1.43배)</td></tr><tr><td class="">0 입력</td><td class="">여유율 · 급수온도 0 → 20 % · 10℃로 바뀜</td><td class="">0 그대로 계산</td></tr><tr><td class="">근거 표기</td><td class="">고시 제2021-851호 · KDS 31 30 20</td><td class="">제2026-360호 타법개정(2026.7.8.) · KDS 31 30 20:2021</td></tr></tbody></table></div></div></div>
+<p>예전 판으로 뽑은 산정서는 보일러 출력이 약 30 % 작게 나왔습니다. 다시 산정하십시오.</p>
+</section>
+<section class="ch" id="ch5"><h2><span class="n">05</span>실무 작업 방법</h2>
+<h3 id="s5-1">5-1. 단계별 절차</h3>
+<div class="svgbox"><svg viewBox="0 0 900 200" role="img" aria-label="급탕 산정 흐름: 인원과 1인 1일 급탕량으로 1일 급탕량을 구하고, 시간최대계수와 사용시간으로 시간 최대 급탕량을, 온도차와 효율로 보일러 열량을, 여유율로 필요 출력을 구한다">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2D3A8C"/></marker></defs>
+<style>.b{fill:#E9ECF8;stroke:#2D3A8C;stroke-width:1.5}.o{fill:#FDF1E7;stroke:#C97A3A;stroke-width:1.5}.t{font:600 14px 'Noto Sans KR','Noto Sans KR Local',sans-serif;fill:#1A1A2E}.s{font:12px 'Noto Sans KR','Noto Sans KR Local',sans-serif;fill:#4A4F66}.l{stroke:#2D3A8C;stroke-width:1.6;fill:none;marker-end:url(#ar)}</style>
+<rect class="b" x="10" y="20" width="190" height="72" rx="10"/><text class="t" x="22" y="48">① 1일 급탕량</text><text class="s" x="22" y="72">Q_day = N × q</text>
+<rect class="b" x="230" y="20" width="200" height="72" rx="10"/><text class="t" x="242" y="48">② 시간 최대</text><text class="s" x="242" y="72">Q_h = Q_day × K_h ÷ T</text>
+<rect class="b" x="460" y="20" width="190" height="72" rx="10"/><text class="t" x="472" y="48">③ 보일러 열량</text><text class="s" x="472" y="72">H = Q_h × ΔT ÷ η</text>
+<rect class="o" x="680" y="20" width="210" height="72" rx="10"/><text class="t" x="692" y="48">④ 필요 출력</text><text class="s" x="692" y="72">P = H ÷ 860 × (1 + α)</text>
+<path class="l" d="M200,56 L228,56"/><path class="l" d="M430,56 L458,56"/><path class="l" d="M650,56 L678,56"/>
+<rect class="b" x="230" y="118" width="420" height="62" rx="10"/><text class="t" x="242" y="144">온도 기준 — 55~60℃ 유지 · 위생기구 43℃ 이하</text><text class="s" x="242" y="166">KDS 31 30 20 1.6.9 · 기술기준 별표 5 2.2.7(2)</text>
+<path class="l" d="M555,118 L555,96"/>
+</svg></div>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">단계</th><th class="">내용</th></tr></thead><tbody><tr><td class="">① 방식 정하기</td><td class="">중앙식(저탕 · 순환) / 개별 순간식을 정하고, 계통을 용도 · 존별로 나눕니다</td></tr><tr><td class="">② 인원 · 원단위</td><td class="">계통별 사용인원과 1인 1일 급탕량을 정합니다. 시설 특성이 다르면 「직접 입력」</td></tr><tr><td class="">③ 산정</td><td class="">온도 · 효율 · 여유율을 넣고 1일 · 시간 최대 급탕량과 필요 출력을 구합니다</td></tr><tr><td class="">④ 장비 · 배관</td><td class="">필요 출력 이상의 표준 장비를 고르고, 급탕관 지름(FU) · 환탕 유량 · 순환펌프는 별도 산정</td></tr><tr><td class="">⑤ 출력</td><td class="">계통별 A4 산정서를 PDF로 남겨 설계도서에 붙입니다</td></tr></tbody></table></div></div>
+<h3 id="s5-2">5-2. 도면 반영 전 확인</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">확인</th></tr></thead><tbody><tr><td class="">온도</td><td class="">급탕배관 55~60℃ 유지 · 위생기구 43℃ 이하 혼합장치(별표 5 2.2.7)</td></tr><tr><td class="">배관 길이</td><td class="">급탕열원 → 위생기구 15 m 이하, 넘으면 환탕 · 가열관(별표 5 2.2.2(3))</td></tr><tr><td class="">환탕</td><td class="">중앙식 환탕관 · 순환펌프 · 밸런싱 밸브(KDS 4.1.6)</td></tr><tr><td class="">안전장치</td><td class="">팽창탱크 · 압력 · 온도 릴리프밸브 배출관 · 진공 릴리프밸브(별표 5 2.2.3 · 2.2.5)</td></tr><tr><td class="">재질</td><td class="">급탕탱크 STS 316L 이상(별표 5 2.2.4(3))</td></tr></tbody></table></div></div>
+<h3 id="s5-3">5-3. 예제 B — 사무소</h3>
+<figure class="shot" id="fig-s10_result_b"><div class="frame"><img src="images/s10_result_b.webp" width="672" height="378" loading="lazy" alt="산정 결과 — 예제 B(사무소 100명)"><span class="pin" style="left:2.19%;top:6.17%">1</span><span class="pin" style="left:2.19%;top:67.02%">2</span></div><figcaption><span class="fno">S10</span>산정 결과 — 예제 B(사무소 100명)</figcaption><ol class="legend"><li><b>1</b><span>1일 1,500 L</span></li><li><b>2</b><span>보일러 21.8 kW</span></li></ol></figure>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 B 결과</th></tr></thead><tbody><tr><td class="">1일 최대 급탕량(60℃)</td><td class="">100명 × 15 L/인·일 = <b>1,500 L/day</b></td></tr><tr><td class="">시간 최대 급탕량</td><td class="">1,500 × K<sub>h</sub> 1.5 ÷ 8 h = <b>281 L/h</b> (4.69 L/min)</td></tr><tr><td class="">보일러 열량</td><td class="">281 × (60 − 10) ÷ 0.9 = 15,625 kcal/h = 18.17 kW</td></tr><tr><td class="">보일러 필요 출력</td><td class="">18.17 × (1 + 20 %) = <b>21.8 kW</b> (18.75 Mcal/h)</td></tr><tr><td class="">사용온도(42℃) 환산 1일량</td><td class="">× (60 − 10) ÷ (42 − 10) = 1.5625 → 2,344 L/day(참고)</td></tr></tbody></table></div></div>
+<p>사무소는 원단위(15 L/인·일)가 작고 사용시간(8 h)이 짧아, 시간 최대 281 L/h 정도입니다. 탕비실 · 샤워실 위주라면 개별 순간식 가열장치(60℃ 이하 설정 — 별표 5 2.2.5(3))도 검토합니다.</p>
+</section>
+<section class="ch" id="ch6"><h2><span class="n">06</span>문제 해결·FAQ</h2>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">증상</th><th class="">해결</th></tr></thead><tbody><tr><td class="">「건물 용도를 먼저 선택하세요」</td><td class="">STEP 1에서 용도 버튼을 누른 뒤 산정하십시오</td></tr><tr><td class="">「급탕온도는 60℃ 이하로 설정하세요」</td><td class="">급탕 온도를 60℃ 이하로 넣으십시오(KDS 31 30 20 1.6.9 · 55~60℃ 유지)</td></tr><tr><td class="">「사용온도는 급탕온도보다 낮아야 합니다」</td><td class="">사용 온도를 급탕 온도보다 낮게(보통 40~43℃) 넣으십시오</td></tr><tr><td class="">예전 산정서보다 출력이 커졌어요</td><td class="">v5.0.1(2026-10-13)에서 1일 급탕량에 곱하던 동시사용률 70 %를 뺐습니다(<a href="#s4-9">4-9</a>)</td></tr><tr><td class="">원단위가 우리 건물과 맞지 않아요</td><td class="">「✏️ 직접 입력」으로 1인 1일 급탕량을 넣으십시오. 일 사용시간도 바꿀 수 있습니다</td></tr><tr><td class="">초기화해도 공사명이 남아요</td><td class="">공사명 · 작성자는 일부러 남깁니다. 지우려면 칸을 비우십시오</td></tr><tr><td class="">화면이 예전 판이에요</td><td class="">새로 고침(Ctrl+F5) 또는 앱을 닫았다 다시 여십시오</td></tr></tbody></table></div></div>
+</section>
+<section class="ch" id="ch7"><h2><span class="n">부록</span></h2>
+<h3 id="a1">A1. 예제 입력값</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">항목</th><th class="">예제 A</th><th class="">예제 B</th></tr></thead><tbody><tr><td class="">용도 · 인원</td><td class="">공동주택 · 거주자 300명</td><td class="">사무소 · 재실자 100명</td></tr><tr><td class="">원단위 · 시간</td><td class="">120 L/인·일 · 16 h</td><td class="">15 L/인·일 · 8 h</td></tr><tr><td class="">온도 · 효율 · 여유율</td><td class="">60/10/42℃ · 90 % · 20 %</td><td class="">60/10/42℃ · 90 % · 20 %</td></tr><tr><td class="">결과</td><td class="">36,000 L/day · 3,375 L/h · 261.6 kW</td><td class="">1,500 L/day · 281 L/h · 21.8 kW</td></tr></tbody></table></div></div>
+<h3 id="a2">A2. 용도별 원단위표 (앱 내장값 · MANMIN 참고값)</h3>
+<div class="brk"><div class="tbl"><table><thead><tr><th class="">용도</th><th class="">단위</th><th class="">L/인·일</th><th class="">h</th><th class="">비고</th></tr></thead><tbody><tr><td class="">호텔·리조트</td><td class="">투숙객</td><td class="">200</td><td class="">24</td><td class="">객실 기준, 레스토랑 별도 고려</td></tr><tr><td class="">병원·의원</td><td class="">입원환자</td><td class="">150</td><td class="">24</td><td class="">외래 별도, 의료행위 추가 고려</td></tr><tr><td class="">사무소</td><td class="">재실자</td><td class="">15</td><td class="">8</td><td class="">구내식당 있을 경우 20L 적용</td></tr><tr><td class="">공동주택</td><td class="">거주자</td><td class="">120</td><td class="">16</td><td class="">세대별 1인 기준</td></tr><tr><td class="">학교</td><td class="">학생</td><td class="">10</td><td class="">8</td><td class="">체육시설 있을 경우 증가</td></tr><tr><td class="">음식점</td><td class="">종업원</td><td class="">20</td><td class="">12</td><td class="">1회전 고객수 기준 5L/인 추가</td></tr><tr><td class="">공장·작업장</td><td class="">작업자</td><td class="">45</td><td class="">8</td><td class="">중작업 60L, 경작업 30L 기준</td></tr><tr><td class="">체육·스포츠</td><td class="">이용자</td><td class="">60</td><td class="">12</td><td class="">샤워 위주, 수영장 별도</td></tr><tr><td class="">미용·목욕</td><td class="">고객</td><td class="">100</td><td class="">12</td><td class="">목욕탕 대인 180L 적용 가능</td></tr><tr><td class="">유치원·어린이집</td><td class="">원아</td><td class="">15</td><td class="">8</td><td class="">급식 포함 시 25L 적용</td></tr><tr><td class="">기숙사·연수원</td><td class="">거주자</td><td class="">100</td><td class="">16</td><td class="">식사·세탁 포함 기준</td></tr><tr><td class="">직접 입력</td><td class="">인</td><td class="">직접</td><td class="">8</td><td class="">사용자 정의 입력</td></tr></tbody></table></div></div>
+<h3 id="a3">A3. 버전 변경 내역</h3>
+<div class="k1"><div class="tbl"><table><thead><tr><th class="">버전</th><th class="">내용</th></tr></thead><tbody><tr><td class="">Ver-5.0 · v5.0.2 (2026-10-13)</td><td class="">사용자 매뉴얼 연결(탭 막대 「📘 매뉴얼」)</td></tr><tr><td class="">Ver-5.0 · v5.0.1 (2026-10-13)</td><td class="">KDS 31 30 20:2021 · 별표 5 원문 대조 — 원단위 · 산정식 MANMIN 참고값 표기, 온도 · 15 m · 환탕 조항 정정, 동시사용률 삭제, 0 입력 처리(<a href="#s4-9">4-9</a>)</td></tr><tr><td class="">Ver-5.0 (2026-08 ~ 09)</td><td class="">디자인 통일(헤더 · 탭 막대 · 요약 스트립), A4 미리보기 · JPG 저장, 오프라인 캐시 개선</td></tr></tbody></table></div></div>
+<h3 id="a4">A4. 용어</h3>
+<div class="brk"><div class="k1"><div class="tbl"><table><thead><tr><th class="">용어</th><th class="">뜻</th></tr></thead><tbody><tr><td class="">1일 최대 급탕량</td><td class="">하루에 쓰는 60℃ 급탕의 양(L/day)</td></tr><tr><td class="">시간 최대 급탕량</td><td class="">가장 많이 쓰는 1시간의 양(L/h)</td></tr><tr><td class="">시간최대계수 K<sub>h</sub></td><td class="">일 평균 시간당 사용량에 대한 피크 시간 배율</td></tr><tr><td class="">환탕관</td><td class="">급탕을 열원으로 되돌려 배관 속 온도를 유지하는 배관</td></tr><tr><td class="">레지오넬라균</td><td class="">20~45℃ 물에서 번식하는 세균 — 급탕배관 55~60℃ 유지의 이유</td></tr><tr><td class="">급탕부하단위(FU)</td><td class="">급탕관 지름 산정에 쓰는 위생기구 부하 단위(별표 8 2.5)</td></tr></tbody></table></div></div></div>
+</section></main></div>
+<footer class="foot">© 2026 김만민 건축사 · ㈜대성건축사사무소 · 급탕량·보일러 출력 산정 시스템 사용자 매뉴얼 Ver-5.0 · 기계설비 기술기준 별표 5 · KDS 31 30 20:2021 <span class="rev">· 화면 대응 개정 2026-10-13</span></footer>
+<div class="pfoot"><span>급탕량·보일러 출력 산정 시스템 사용자 매뉴얼 Ver-5.0</span><span>2026-10-13</span></div>
+<div id="lb" role="dialog" aria-label="그림 확대"><img alt=""></div>
+<button class="totop" aria-label="맨 위로">↑</button>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),li=lb.querySelector('img');
+  document.querySelectorAll('figure.shot .frame').forEach(function(f){f.addEventListener('click',function(){li.src=f.querySelector('img').src;li.alt=f.querySelector('img').alt;lb.classList.add('open');});});
+  lb.addEventListener('click',function(){lb.classList.remove('open');li.removeAttribute('src');});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+  document.querySelector('.totop').addEventListener('click',function(){window.scrollTo(0,0);});
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'0px 0px -70% 0px'});
+    document.querySelectorAll('section.ch,h3[id]').forEach(function(s){io.observe(s);});
+  }
+})();
+/* 좁은 화면 표 쌓기 준비: 숫자 칸이 없는 표에 stack 표시, 각 칸에 머리글(data-th) 복사 */
+(function(){document.querySelectorAll('.tbl').forEach(function(t){var tb=t.querySelector('table');if(!tb||!tb.tHead)return;
+ if(tb.querySelector('td.num,th.num'))return;var hs=[].map.call(tb.tHead.rows[0].cells,function(c){return c.textContent.trim()});
+ [].forEach.call(tb.tBodies[0].rows,function(r){[].forEach.call(r.cells,function(c,i){if(hs[i])c.setAttribute('data-th',hs[i])})});t.classList.add('stack');if(hs.length===2)t.classList.add('c2')})})();
+</script>
+</body></html>
