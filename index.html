@@ -572,7 +572,7 @@ input[type="number"]{-moz-appearance:textfield;}
     </div>
     <div class="hdr-right-wrap">
       <!-- v5.0-HDR — 마스터 4줄(13/11/11/10) -->
-      <div class="hdr-right"><strong>기계설비 기술기준</strong><br/>국토교통부 고시 제2021-851호<br/>별표 5 · KDS 31 30 20<br/><em>[시행 2026. 7. 8.]</em></div>
+      <div class="hdr-right"><strong>기계설비 기술기준 별표 5</strong><br/>고시 제2021-851호 · 제2026-360호<br/>KDS 31 30 20:2021<br/><em>[시행 2026. 7. 8.]</em></div>
       <div class="hdr-btns">
         <!-- v5.0 : 헤더 출력 버튼 없음 — A4 탭 출력바로 일원화한다(§3-1)
              초기화는 우측 하단 FAB 스택으로 이관했다(§16-18) -->
@@ -656,7 +656,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div class="card-head">
           <div class="card-ico">🏢</div>
           <div class="card-tit">STEP 1 · 건물 용도 선택</div>
-          <span class="cbadge">KDS 31 30 20</span>
+          <span class="cbadge">MANMIN 참고값</span>
         </div>
         <div class="card-body">
           <div class="nb org" style="margin-bottom:10px;">
@@ -701,16 +701,9 @@ input[type="number"]{-moz-appearance:textfield;}
               </div>
             </div>
           </div>
-          <div class="fgrp" style="margin-bottom:8px;">
-            <label class="flbl">동시사용률 (%)</label>
-            <div class="input-sfx">
-              <input class="finput mono" type="number" id="simRate" min="10" max="100" value="70" oninput="onInputChange()"/>
-              <span class="sfx">%</span>
-            </div>
-          </div>
           <div class="nb org">
-            <div class="nb-tit">📌 동시사용률</div>
-            <div class="nb-txt">일반적으로 주거 70~80%, 사무소 60~70%, 호텔·병원 80~90% 적용. 기본값 70%.</div>
+            <div class="nb-tit">📌 1일 급탕량 · 피크</div>
+            <div class="nb-txt">1일 급탕량 = 사용인원 × 1인 1일 급탕량. 피크는 시간최대계수 K<sub>h</sub> 1.5로만 반영합니다(MANMIN 참고값 — 기술기준 · KDS에 수치 없음).</div>
           </div>
         </div>
       </div>
@@ -720,7 +713,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div class="card-head">
           <div class="card-ico">🌡️</div>
           <div class="card-tit">STEP 3 · 온도 조건</div>
-          <span class="cbadge">급탕온도 60℃ 이하</span>
+          <span class="cbadge">급탕온도 55~60℃</span>
         </div>
         <div class="card-body">
           <div class="frow3">
@@ -748,7 +741,7 @@ input[type="number"]{-moz-appearance:textfield;}
           </div>
           <div class="nb org">
             <div class="nb-tit">⚠️ 기준 규정</div>
-            <div class="nb-txt">• 급탕온도는 60℃ 이하로 설계 (기술기준 2.2.7)<br>• 위생기구 최대 급탕온도 43℃ 이하 제한<br>• 레지오넬라균 방지: 저장온도 60℃ 이상 유지</div>
+            <div class="nb-txt">• 급탕배관 급탕온도 55~60℃ 유지 — 레지오넬라균 방지(KDS 31 30 20:2021 1.6.9) · 이 산정기는 60℃ 초과 입력을 막습니다<br>• 위생기구 급탕온도 43℃ 이하로 제한할 수 있어야 함(별표 5 2.2.7(2))<br>• 난방겸용 · 순간식 가열장치는 60℃ 이하로 제한(별표 5 2.2.3(1) · 2.2.5(3))</div>
           </div>
           <div class="fgrp" style="margin-top:8px;">
             <label class="flbl">보일러 효율 (%)</label>
@@ -789,7 +782,7 @@ input[type="number"]{-moz-appearance:textfield;}
           <div class="sum-row"><span class="sum-k">사용인원</span><span class="sum-v" id="r_persons">—</span></div>
           <div class="sum-row"><span class="sum-k">1인 1일 급탕량 (60℃기준)</span><span class="sum-v" id="r_perPerson">—</span></div>
           <div class="sum-row"><span class="sum-k">일 사용시간</span><span class="sum-v" id="r_hours">—</span></div>
-          <div class="sum-row"><span class="sum-k">동시사용률</span><span class="sum-v" id="r_sim">—</span></div>
+          <div class="sum-row"><span class="sum-k">시간최대계수 K<sub>h</sub></span><span class="sum-v" id="r_sim">—</span></div>
           <div class="sum-row"><span class="sum-k">급탕 / 급수 / 사용온도</span><span class="sum-v" id="r_temps">—</span></div>
           <div class="sum-row"><span class="sum-k">보일러 효율</span><span class="sum-v" id="r_eff">—</span></div>
           <div class="sum-row"><span class="sum-k">여유율 (안전율)</span><span class="sum-v" id="r_sf">—</span></div>
@@ -801,7 +794,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div class="rh-sub">1일 최대 급탕량 (60℃ 기준)</div>
         <div class="rh-val mono" id="r_daily">—</div>
         <div class="rh-unit">L/day</div>
-        <div class="rh-badge">🌡 급탕온도 60℃ · KDS 31 30 20</div>
+        <div class="rh-badge">🌡 급탕온도 55~60℃ · KDS 31 30 20 1.6.9</div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
@@ -848,7 +841,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
       <!-- 산정식 박스 -->
       <div class="formula-box">
-        <div class="formula-title">📐 적용 산정식 (기술기준 별표5, KDS 31 30 20)</div>
+        <div class="formula-title">📐 적용 산정식 (MANMIN 참고 — 기술기준 · KDS에 산정식 없음)</div>
         <div class="formula-eq" id="formulaDisplay">용도를 선택하고 산정 버튼을 누르세요.</div>
       </div>
     </div>
@@ -865,10 +858,10 @@ input[type="number"]{-moz-appearance:textfield;}
       <div class="nb org">
         <div class="nb-tit">⚙️ 적용 기준</div>
         <div class="nb-txt">
-          · 기계설비 기술기준 (국토교통부 고시 제2021-851호) 별표5<br>
-          · KDS 31 30 20 급탕설비 설계기준<br>
-          · KCS 31 30 20 급탕설비공사 표준시방서<br>
-          · 급탕온도 기준: 60℃ 이하 (기술기준 2.2.7항)
+          · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호 타법개정, 2026.7.8. 시행)) 별표 5<br>
+          · KDS 31 30 20:2021 급탕설비 설계기준 · KCS 31 30 20 급탕설비공사<br>
+          · 급탕온도 55~60℃ 유지(KDS 1.6.9) · 위생기구 43℃ 이하(별표 5 2.2.7(2))<br>
+          · 1인 1일 급탕량 · K<sub>h</sub> · 보일러 산정식은 MANMIN 참고값(기준에 수치 없음)
         </div>
       </div>
     </div><!-- /noResultPanel -->
@@ -880,12 +873,12 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="card-head">
       <div class="card-ico">📋</div>
       <div class="card-tit">건물 용도별 1일 급탕 사용량 기준표</div>
-      <span class="cbadge">KDS 31 30 20</span>
+      <span class="cbadge">MANMIN 참고값</span>
     </div>
     <div class="card-body">
       <div class="nb org" style="margin-bottom:12px;">
         <div class="nb-tit">📌 기준 안내</div>
-        <div class="nb-txt">아래 표는 KDS 31 30 20(급탕설비 설계기준) 및 국내 기계설비 기술기준에서 제시하는 건물 용도별 1인당 1일 급탕사용량 기준값입니다. 기준온도 60℃ 기준이며, 사용온도(약 42℃)로 환산 시 약 1.5배 증가합니다.</div>
+        <div class="nb-txt">아래 표는 설비 설계 편람 계열 자료를 정리한 <b>MANMIN 참고값</b>입니다. 기계설비 기술기준 별표 5와 KDS 31 30 20:2021에는 용도별 1인 1일 급탕량 수치가 없습니다. 기준온도 60℃이며, 사용온도(약 42℃)로 환산하면 약 1.56배가 됩니다.</div>
       </div>
       <table class="gtbl">
         <thead>
@@ -913,18 +906,17 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="card-head">
       <div class="card-ico">📐</div>
       <div class="card-tit">급탕량 및 보일러 출력 산정 공식</div>
-      <span class="cbadge">기계설비 기술기준 별표5</span>
+      <span class="cbadge">MANMIN 참고 산정식</span>
     </div>
     <div class="card-body">
 
       <div class="modal-sec">① 1일 최대 급탕량 산정</div>
       <div class="formula-box">
         <div class="formula-title">📐 1일 최대 급탕량 (60℃ 기준)</div>
-        <div class="formula-eq">Q<sub>day</sub> = N × q × η<sub>s</sub></div>
+        <div class="formula-eq">Q<sub>day</sub> = N × q</div>
         <div class="formula-note">
           · N : 사용인원 (명)<br>
-          · q : 1인 1일 급탕사용량 (L/인·일, 60℃ 기준, 용도별 기준값 적용)<br>
-          · η<sub>s</sub> : 동시사용률 (소수값, 예: 0.70)
+          · q : 1인 1일 급탕사용량 (L/인·일, 60℃ 기준, 용도별 MANMIN 참고값)
         </div>
       </div>
 
@@ -934,7 +926,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div class="formula-eq">Q<sub>h</sub> = Q<sub>day</sub> × K<sub>h</sub> / T</div>
         <div class="formula-note">
           · Q<sub>day</sub> : 1일 최대 급탕량 (L/day)<br>
-          · K<sub>h</sub> : 시간 최대 계수 (일반적으로 1.5~2.0 적용, 본 산정기 1.5 적용)<br>
+          · K<sub>h</sub> : 시간 최대 계수 (일반적으로 1.5~2.0, 본 산정기 1.5 — MANMIN 참고값)<br>
           · T : 1일 사용시간 (h)
         </div>
       </div>
@@ -975,13 +967,13 @@ input[type="number"]{-moz-appearance:textfield;}
       </div>
 
       <div class="nb org">
-        <div class="nb-tit">⚠️ 설계 주요 규정 (기술기준 2.2절)</div>
+        <div class="nb-tit">⚠️ 설계 주요 규정 (기술기준 별표 5 2.2 · KDS 31 30 20:2021)</div>
         <div class="nb-txt">
-          · 급탕온도: 60℃ 이하 (레지오넬라균 방지 위해 저장은 60℃ 이상 유지 권장)<br>
-          · 위생기구 급탕온도: 43℃ 이하로 제한 (기술기준 2.2.7(2))<br>
-          · 급탕배관 길이: 급탕열원에서 위생기구까지 15m 이하<br>
-          · 중앙급탕방식: 환탕배관 및 급탕순환펌프 설계 필수<br>
-          · 보일러 + 온도조절밸브로 급탕배관 온도 60℃ 이하 유지
+          · 급탕배관 급탕온도: 55~60℃ 유지 — 레지오넬라균 방지 (KDS 1.6.9)<br>
+          · 위생기구 급탕온도: 43℃ 이하로 제한할 수 있어야 함 (별표 5 2.2.7(2))<br>
+          · 급탕배관 길이: 급탕열원에서 위생기구까지 15 m 이하 — 환탕관 · 가열관은 열원으로 간주 (별표 5 2.2.2(3))<br>
+          · 중앙급탕방식: 환탕배관 · 급탕순환펌프 설계 (별표 5 2.2.1(6)) — KDS 1.6.6은 배관거리 30 m 이상에 환탕관 · 순환펌프 또는 가열장치<br>
+          · 난방겸용 급탕가열장치: 온도조절밸브로 급탕배관 60℃ 이하 제한 (별표 5 2.2.3(1))
         </div>
       </div>
     </div>
@@ -1030,7 +1022,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div style="width:32px;height:32px;background:#c2410c;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🔥</div>
         <div>
           <div class="modal-tit">급탕량·보일러 출력 산정 시스템 안내</div>
-          <div style="font-size:9px;color:#b45309;font-weight:700;margin-top:1px;">MANMIN-Ver5.0 · 기계설비 기술기준 별표5 · KDS 31 30 20</div>
+          <div style="font-size:9px;color:#b45309;font-weight:700;margin-top:1px;">MANMIN-Ver5.0 · 기계설비 기술기준 별표 5 · KDS 31 30 20:2021</div>
         </div>
       </div>
       <button class="modal-cls" onclick="closeGuide()">✕</button>
@@ -1051,7 +1043,7 @@ input[type="number"]{-moz-appearance:textfield;}
       <div class="gm-panel active" id="gmp-0">
         <div class="nb org" style="margin-bottom:12px;">
           <div class="nb-tit">📱 시스템 개요</div>
-          <div class="nb-txt">본 시스템은 기계설비 기술기준(국토교통부 고시 제2021-851호) 별표5와 KDS 31 30 20을 기반으로 건물 용도·사용인원·온도 조건만 입력하면 <b>1일 최대급탕량</b>과 <b>보일러 필요 출력</b>을 자동 산정합니다. 데스크탑·태블릿·모바일 모든 환경에서 사용 가능합니다.</div>
+          <div class="nb-txt">본 시스템은 기계설비 기술기준(고시 제2021-851호(제2026-360호 타법개정, 2026.7.8. 시행)) 별표 5와 KDS 31 30 20:2021의 온도 · 배관 기준을 따르고, 용도별 원단위 · 산정식은 MANMIN 참고값을 써서 건물 용도·사용인원·온도 조건만 입력하면 <b>1일 최대급탕량</b>과 <b>보일러 필요 출력</b>을 자동 산정합니다. 데스크탑·태블릿·모바일 모든 환경에서 사용 가능합니다.</div>
         </div>
 
         <!-- 탭 구조 안내 -->
@@ -1068,7 +1060,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="min-width:28px;height:28px;border-radius:50%;background:#b45309;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📋</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">기준값 참조표 탭</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.7;">KDS 31 30 20 기준 건물 용도별 1일 급탕량 원단위 및 표준 사용시간 일람표. 온도 환산 방법 포함.</div>
+              <div style="font-size:10.5px;color:#78350f;line-height:1.7;">건물 용도별 1일 급탕량 원단위(MANMIN 참고값) 및 표준 사용시간 일람표. 온도 환산 방법 포함.</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:flex-start;background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:9px;padding:10px;">
@@ -1133,7 +1125,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">2</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">👥 사용인원 입력</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">설계 대상 총 사용인원(명)을 입력합니다. 일 사용시간은 용도에 따라 자동 적용되며 수정 가능. 동시사용률 기본값 70%(용도에 따라 조정).</div>
+              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">설계 대상 총 사용인원(명)을 입력합니다. 일 사용시간은 용도에 따라 자동 적용되며 수정 가능. 1일 급탕량 = 인원 × 원단위(동시사용률은 곱하지 않음).</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px;">
@@ -1163,31 +1155,24 @@ input[type="number"]{-moz-appearance:textfield;}
         <table class="gtbl" style="margin-bottom:12px;">
           <thead><tr><th>항목</th><th>기본값</th><th>권장 범위</th><th>규정 한도</th></tr></thead>
           <tbody>
-            <tr><td>급탕 온도</td><td>60℃</td><td>55~60℃</td><td>60℃ 이하</td></tr>
+            <tr><td>급탕 온도</td><td>60℃</td><td>55~60℃</td><td>55~60℃ 유지(KDS 1.6.9)</td></tr>
             <tr><td>급수(수돗물) 온도</td><td>10℃</td><td>5~15℃</td><td>—</td></tr>
-            <tr><td>위생기구 사용온도</td><td>42℃</td><td>40~43℃</td><td>43℃ 이하</td></tr>
-            <tr><td>보일러 저장온도</td><td>—</td><td>60℃ 이상 유지</td><td>레지오넬라균 방지</td></tr>
+            <tr><td>위생기구 사용온도</td><td>42℃</td><td>40~43℃</td><td>43℃ 이하(별표 5 2.2.7(2))</td></tr>
+            <tr><td>급탕배관 온도</td><td>—</td><td>55~60℃ 유지</td><td>레지오넬라균 방지(KDS 1.6.9)</td></tr>
           </tbody>
         </table>
         <div class="modal-sec">⚙️ 산정 계수 설명</div>
         <table class="gtbl" style="margin-bottom:12px;">
           <thead><tr><th>계수</th><th>기본값</th><th>권장 범위</th><th>설명</th></tr></thead>
           <tbody>
-            <tr><td>동시사용률 η<sub>s</sub></td><td>70%</td><td>60~90%</td><td>전체 인원 중 동시 급탕 사용 비율</td></tr>
-            <tr><td>시간최대계수 K<sub>h</sub></td><td>1.5</td><td>1.5~2.0</td><td>일 평균 대비 피크 시간 배율 (자동 적용)</td></tr>
+                        <tr><td>시간최대계수 K<sub>h</sub></td><td>1.5</td><td>1.5~2.0</td><td>일 평균 대비 피크 시간 배율 (자동 적용 · MANMIN 참고값)</td></tr>
             <tr><td>보일러 효율 η<sub>b</sub></td><td>90%</td><td>85~95%</td><td>입력 열량 대비 유효 출력 비율</td></tr>
             <tr><td>여유율 α</td><td>20%</td><td>15~25%</td><td>예비 용량·열손실·배관손실 보정</td></tr>
           </tbody>
         </table>
         <div class="nb org">
-          <div class="nb-tit">📐 동시사용률 용도별 권장값</div>
-          <div class="nb-txt">
-            · 주거(아파트·기숙사) : 70~80%<br>
-            · 사무소·학교 : 60~70%<br>
-            · 호텔·병원 : 80~90%<br>
-            · 체육·목욕 : 80~90%<br>
-            · 음식점·공장 : 70~80%
-          </div>
+          <div class="nb-tit">📐 원단위 · 계수의 근거</div>
+          <div class="nb-txt">1인 1일 급탕량 · K<sub>h</sub> · 보일러 산정식은 MANMIN 참고값(설비 설계 편람 계열 — 기술기준 별표 5 · KDS 31 30 20:2021에는 용도별 급탕량 · 산정식 수치 없음)입니다. 동시사용률은 1일 급탕량에 곱하지 않습니다(v5.0.1).</div>
         </div>
       </div>
 
@@ -1195,7 +1180,7 @@ input[type="number"]{-moz-appearance:textfield;}
       <div class="gm-panel" id="gmp-3" style="display:none;">
         <div class="nb org" style="margin-bottom:10px;">
           <div class="nb-tit">📌 기준 안내</div>
-          <div class="nb-txt">KDS 31 30 20 기준. 기준온도 60℃. 사용온도(42℃)로 환산 시 약 1.56배 증가합니다.</div>
+          <div class="nb-txt">MANMIN 참고값(기술기준 · KDS에 수치 없음). 기준온도 60℃. 사용온도(42℃)로 환산 시 약 1.56배 증가합니다.</div>
         </div>
         <table class="gtbl" id="modalRefTable"></table>
         <div class="nb blue">
@@ -1244,7 +1229,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
         <div class="nb grn">
           <div class="nb-tit">💡 결과 활용 방법</div>
-          <div class="nb-txt">산정된 보일러 출력을 기준으로 상위 사양의 표준 제품을 선정하고, 실제 설계 시에는 건물의 단열성능, 배관 열손실, 배관길이(환탕 배관 15m 기준), 사용 패턴 등을 종합 검토하여 최종 용량을 결정합니다.</div>
+          <div class="nb-txt">산정된 보일러 출력을 기준으로 상위 사양의 표준 제품을 선정하고, 실제 설계 시에는 건물의 단열성능, 배관 열손실, 급탕열원~위생기구 배관길이(15 m 이하 · 별표 5 2.2.2(3)), 사용 패턴 등을 종합 검토하여 최종 용량을 결정합니다.</div>
         </div>
       </div>
 
@@ -1255,7 +1240,7 @@ input[type="number"]{-moz-appearance:textfield;}
 <script>
 /* ════════════════════════════════════════
    건물 용도별 급탕 기준 데이터
-   출처: KDS 31 30 20, 기계설비 기술기준 별표5
+   출처: MANMIN 참고값(설비 설계 편람 계열 — 기술기준 별표 5 · KDS 31 30 20:2021에는 용도별 급탕량 · 산정식 수치 없음)
 ═══════════════════════════════════════ */
 const BUILDING_TYPES = [
   { id:'hotel',     ico:'🏨', nm:'호텔·리조트',   q:200, h:24, unit:'투숙객', note:'객실 기준, 레스토랑 별도 고려' },
@@ -1359,24 +1344,27 @@ function doCalc() {
     if (!q || q <= 0) { showToast('⚠️ 1인 1일 급탕량을 입력하세요'); return; }
   }
 
-  const T = +document.getElementById('useHours').value || selectedType.h;
-  const simPct = +document.getElementById('simRate').value || 70;
-  const simRate = simPct / 100;
-  const Thot = +document.getElementById('hotTemp').value || 60;
-  const Tcold = +document.getElementById('coldTemp').value || 10;
-  const Tuse = +document.getElementById('useTemp').value || 42;
-  const effPct = +document.getElementById('efficiency').value || 90;
+  /* v5.0.1 — 0 입력을 기본값으로 바꾸지 않는다(빈칸만 기본값) */
+  const _v = (id, d) => { const x = parseFloat(document.getElementById(id).value); return isNaN(x) ? d : x; };
+  const _r6 = x => Math.round(x * 1e6) / 1e6;
+  const T = _v('useHours', selectedType.h);
+  const Thot = _v('hotTemp', 60);
+  const Tcold = _v('coldTemp', 10);
+  const Tuse = _v('useTemp', 42);
+  const effPct = _v('efficiency', 90);
+  if (!(T > 0)) { showToast('⚠️ 일 사용시간을 입력하세요'); return; }
+  if (!(effPct > 0)) { showToast('⚠️ 보일러 효율을 입력하세요'); return; }
   const eff = effPct / 100;
-  const sfPct = +document.getElementById('safetyFactor').value || 20;
+  const sfPct = _v('safetyFactor', 20);
   const sf = sfPct / 100;
 
   // 유효성 검사
   if (Thot <= Tcold) { showToast('⚠️ 급탕온도가 급수온도보다 높아야 합니다'); return; }
   if (Tuse >= Thot) { showToast('⚠️ 사용온도는 급탕온도보다 낮아야 합니다'); return; }
-  if (Thot > 60) { showToast('⚠️ 급탕온도는 60℃ 이하로 설정하세요 (기술기준 2.2.7)'); return; }
+  if (Thot > 60) { showToast('⚠️ 급탕온도는 60℃ 이하로 설정하세요 (KDS 31 30 20 1.6.9 · 55~60℃ 유지)'); return; }
 
-  // ① 1일 최대 급탕량 (60℃ 기준)
-  const Q_day_60 = N * q * simRate;
+  // ① 1일 최대 급탕량 (60℃ 기준) — v5.0.1 동시사용률 삭제
+  const Q_day_60 = _r6(N * q);
 
   // ② 사용온도 기준 환산
   const convFactor = (Thot - Tcold) / (Tuse - Tcold);
@@ -1384,11 +1372,11 @@ function doCalc() {
 
   // ③ 시간 최대 급탕량 (K_h = 1.5)
   const Kh = 1.5;
-  const Q_h = Q_day_60 * Kh / T;
+  const Q_h = _r6(Q_day_60 * Kh / T);
   const Q_min = Q_h / 60;
 
   // ④ 보일러 열량 (kcal/h)
-  const H_kcal = Q_h * 1.0 * 1.0 * (Thot - Tcold) / eff;
+  const H_kcal = _r6(Q_h * 1.0 * 1.0 * (Thot - Tcold) / eff);
 
   // ⑤ kW 변환 및 여유율 적용
   const H_kW_base = H_kcal / 860;
@@ -1404,7 +1392,7 @@ function doCalc() {
   document.getElementById('r_persons').textContent = N.toLocaleString() + ' 명';
   document.getElementById('r_perPerson').textContent = q + ' L/인·일 (60℃)';
   document.getElementById('r_hours').textContent = T + ' h';
-  document.getElementById('r_sim').textContent = simPct + ' %';
+  document.getElementById('r_sim').textContent = Kh + ' (MANMIN 참고)';
   document.getElementById('r_temps').textContent = `${Thot}℃ / ${Tcold}℃ / ${Tuse}℃`;
   document.getElementById('r_eff').textContent = effPct + ' %';
   document.getElementById('r_sf').textContent = sfPct + ' %';
@@ -1420,7 +1408,6 @@ function doCalc() {
   const rows = [
     ['사용인원', `${N.toLocaleString()} 명`],
     ['1인 1일 급탕량 (60℃)', `${q} L/인·일`],
-    ['동시사용률', `${simPct} % (× ${simRate.toFixed(2)})`],
     ['1일 최대급탕량 (60℃)', `${Math.round(Q_day_60).toLocaleString()} L/day`],
     ['온도 환산계수', `${convFactor.toFixed(3)} (60℃→${Tuse}℃)`],
     [`1일 급탕량 (${Tuse}℃ 기준)`, `${Math.round(Q_day_use).toLocaleString()} L/day`],
@@ -1440,7 +1427,7 @@ function doCalc() {
 
   // 산정식 표시
   document.getElementById('formulaDisplay').innerHTML = `
-Q<sub>day</sub> = ${N} × ${q} × ${simRate.toFixed(2)} = <strong>${Math.round(Q_day_60).toLocaleString()} L/day</strong><br>
+Q<sub>day</sub> = ${N} × ${q} = <strong>${Math.round(Q_day_60).toLocaleString()} L/day</strong><br>
 Q<sub>h</sub> = ${Math.round(Q_day_60).toLocaleString()} × ${Kh} / ${T} = <strong>${Math.round(Q_h).toLocaleString()} L/h</strong><br>
 H = ${Math.round(Q_h).toLocaleString()} × (${Thot}-${Tcold}) / ${eff} = <strong>${Math.round(H_kcal).toLocaleString()} kcal/h</strong><br>
 P = ${H_kW_base.toFixed(2)} kW × (1+${sf.toFixed(2)}) = <strong style="color:#c2410c;">${H_kW.toFixed(1)} kW</strong>
@@ -1449,11 +1436,11 @@ P = ${H_kW_base.toFixed(2)} kW × (1+${sf.toFixed(2)}) = <strong style="color:#c
   // 노트
   document.getElementById('calcNote').style.display = 'block';
   document.getElementById('calcNoteText').innerHTML =
-    `기준: 기계설비 기술기준 별표5 · KDS 31 30 20<br>급탕온도 ${Thot}℃, 급수온도 ${Tcold}℃, 사용온도 ${Tuse}℃<br>보일러 효율 ${effPct}%, 여유율 ${sfPct}% 적용`;
+    `기준: 온도 · 배관 — 기계설비 기술기준 별표 5 · KDS 31 30 20:2021 / 원단위 · K<sub>h</sub> · 산정식 — MANMIN 참고값<br>급탕온도 ${Thot}℃, 급수온도 ${Tcold}℃, 사용온도 ${Tuse}℃<br>보일러 효율 ${effPct}%, 여유율 ${sfPct}% 적용`;
 
   /* 결과 저장 & A4/모바일 갱신 */
   window._calcResult = {
-    btype:selectedType, N, q, T, simPct, simRate,
+    btype:selectedType, N, q, T,
     Thot, Tcold, Tuse, effPct, eff, sfPct, sf,
     Q_day_60, Q_day_use, convFactor, Kh:1.5, Q_h, Q_min,
     H_kcal, H_kW_base, H_kW, H_Mcal, ts: new Date()
@@ -1474,7 +1461,6 @@ function resetAll() {
   document.getElementById('selectedBtype').value = '';
   document.getElementById('persons').value = '';
   document.getElementById('useHours').value = '';
-  document.getElementById('simRate').value = '70';
   document.getElementById('hotTemp').value = '60';
   document.getElementById('coldTemp').value = '10';
   document.getElementById('useTemp').value = '42';
@@ -1851,11 +1837,11 @@ function renderA4(r){
   <tr><td class="a4-th">작 성 자</td><td style="font-weight:800;">${projAuthor}</td><td class="a4-th">작 성 일</td><td style="font-weight:800;">${ds}</td></tr>
   <tr><td class="a4-th">건물 용도</td><td>${r.btype.ico} ${r.btype.nm}</td><td class="a4-th">기준 단위</td><td>${r.btype.unit}</td></tr>
   <tr><td class="a4-th">사용인원</td><td>${r.N.toLocaleString()} 명</td><td class="a4-th">일 사용시간</td><td>${r.T} h</td></tr>
-  <tr><td class="a4-th">1인 급탕량(60℃)</td><td>${r.q} L/인·일</td><td class="a4-th">동시사용률</td><td>${r.simPct} %</td></tr>
+  <tr><td class="a4-th">1인 급탕량(60℃)</td><td>${r.q} L/인·일</td><td class="a4-th">시간최대계수</td><td>K<sub>h</sub> ${r.Kh} (MANMIN 참고)</td></tr>
   <tr><td class="a4-th">급탕 온도</td><td>${r.Thot} ℃</td><td class="a4-th">급수 온도</td><td>${r.Tcold} ℃</td></tr>
   <tr><td class="a4-th">사용 온도</td><td>${r.Tuse} ℃</td><td class="a4-th">온도 환산계수</td><td>${r.convFactor.toFixed(3)}</td></tr>
   <tr><td class="a4-th">보일러 효율</td><td>${r.effPct} %</td><td class="a4-th">여유율</td><td>${r.sfPct} %</td></tr>
-  <tr><td class="a4-th">서 명 란</td><td style="height:24px;"></td><td class="a4-th">적용 기준</td><td>기계설비 기술기준 별표5 · KDS 31 30 20</td></tr>
+  <tr><td class="a4-th">서 명 란</td><td style="height:24px;"></td><td class="a4-th">적용 기준</td><td>기계설비 기술기준 별표 5 · KDS 31 30 20:2021</td></tr>
 </table>
 <div class="a4-sub">2. 주요 산정 결과</div>
 <div class="a4-hero-grid">
@@ -1869,7 +1855,7 @@ function renderA4(r){
   <colgroup><col style="width:42%"><col style="width:22%"><col style="width:36%"></colgroup>
   <thead><tr><th>산정 항목</th><th>산정값</th><th>산정식 및 비고</th></tr></thead>
   <tbody>
-    <tr><td>1일 최대급탕량 (60℃)</td><td style="text-align:center;font-weight:900;color:#c2410c;">${Math.round(r.Q_day_60).toLocaleString()} L/day</td><td>Q = ${r.N} × ${r.q} × ${r.simRate.toFixed(2)}</td></tr>
+    <tr><td>1일 최대급탕량 (60℃)</td><td style="text-align:center;font-weight:900;color:#c2410c;">${Math.round(r.Q_day_60).toLocaleString()} L/day</td><td>Q = ${r.N} × ${r.q}</td></tr>
     <tr><td>1일 급탕량 (${r.Tuse}℃ 기준)</td><td style="text-align:center;font-weight:800;">${Math.round(r.Q_day_use).toLocaleString()} L/day</td><td>× 환산계수 ${r.convFactor.toFixed(3)}</td></tr>
     <tr><td>시간 최대급탕량 (Kh=1.5)</td><td style="text-align:center;font-weight:900;color:#0e7490;">${Math.round(r.Q_h).toLocaleString()} L/h</td><td>${Math.round(r.Q_day_60).toLocaleString()} × 1.5 / ${r.T}</td></tr>
     <tr><td>분 최대급탕량</td><td style="text-align:center;">${r.Q_min.toFixed(2)} L/min</td><td>Q_h ÷ 60</td></tr>
@@ -1883,16 +1869,16 @@ function renderA4(r){
 <table class="a4-tbl">
   <thead><tr><th>기준 항목</th><th>규정 내용</th><th>적용 여부</th></tr></thead>
   <tbody>
-    <tr><td>급탕 온도</td><td>60℃ 이하 (기술기준 2.2.7)</td><td style="text-align:center;">${r.Thot<=60?'✅ 충족':'⚠️ 확인필요'}</td></tr>
-    <tr><td>위생기구 급탕온도</td><td>43℃ 이하 (기술기준 2.2.7(2))</td><td style="text-align:center;">${r.Tuse<=43?'✅ 충족':'⚠️ 확인필요'}</td></tr>
-    <tr><td>레지오넬라 방지</td><td>저장온도 60℃ 이상 유지 권장</td><td style="text-align:center;">📌 설계 시 확인</td></tr>
-    <tr><td>환탕 배관</td><td>급탕열원→최말단 15m 초과 시 의무</td><td style="text-align:center;">📌 배관 길이 확인</td></tr>
+    <tr><td>급탕 온도</td><td>55~60℃ 유지 — 레지오넬라 방지 (KDS 31 30 20 1.6.9)</td><td style="text-align:center;">${(r.Thot>=55&&r.Thot<=60)?'✅ 충족':'⚠️ 확인필요'}</td></tr>
+    <tr><td>위생기구 급탕온도</td><td>43℃ 이하로 제한 가능 (별표 5 2.2.7(2))</td><td style="text-align:center;">${r.Tuse<=43?'✅ 충족':'⚠️ 확인필요'}</td></tr>
+    <tr><td>급탕배관 길이</td><td>급탕열원 → 위생기구 15 m 이하 (별표 5 2.2.2(3))</td><td style="text-align:center;">📌 배관 길이 확인</td></tr>
+    <tr><td>환탕 배관</td><td>중앙식 — 환탕관 · 순환펌프 (별표 5 2.2.1(6) · KDS 1.6.6 30 m 이상)</td><td style="text-align:center;">📌 방식 확인</td></tr>
   </tbody>
 </table>
 <div class="a4-footer">
   <span>급탕량·보일러 출력 산정서 · MANMIN-Ver5.0</span>
   <span>작성자: ${projAuthor} · 작성일: ${ds}</span>
-  <span>기계설비 기술기준 별표5 · KDS 31 30 20</span>
+  <span>기계설비 기술기준 별표 5 · KDS 31 30 20:2021 · 원단위 · 산정식 MANMIN 참고값</span>
 </div>`;
   requestAnimationFrame(()=>requestAnimationFrame(scaleA4));
 }

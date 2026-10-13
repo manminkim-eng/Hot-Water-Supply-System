@@ -40,7 +40,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'geuptang-v5.1.8';   /* 2026-09-02 헤더 통일 */
+const CACHE  = 'geuptang-v5.1.9';   /* 2026-10-13 v5.0.1 근거 · 계산 정정 */
 
 /* 2026-09-01 오업로드로 이 주소에 박힌 냉온배관 캐시 — 이번 배포에서 함께 지운다 */
 const ORPHAN = ['pipe-v5.0.0'];
