@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="급탕량·보일러 출력 산정 시스템 — 기계설비 기술기준 별표5 · KDS 31 30 20">
 <meta name="twitter:image" content="https://manminkim-eng.github.io/Hot-Water-Supply-System/og-card.jpg">
 <meta name="description" content="급탕량·보일러 출력 산정 시스템 — 기계설비 기술기준 별표5 · KDS 31 30 20"/>
-<meta name="theme-color" content="#c2410c"/>
+<meta name="theme-color" content="#2d5186"/>
 <!-- ▣ PWA 매니페스트 -->
 <link rel="manifest" href="./manifest.json"/>
 <!-- ▣ iOS PWA -->
@@ -55,17 +55,18 @@
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
+<style>:root{--d:#5a9ae8;--d-deep:#2d5186;--d-lt:#9cc3f5;--d-tint:#dbeafe;--d-rgb:90,154,232;--fs-badge:11px;--fs-cap:11.5px;--fs-sm:12.5px;--fs-desc:13px;--fs-body:14px;--fs-sec:16px;--fs-card:17px;--fs-stat:20px;}
+
 /* ⛔ v5.0 — 전역 `*{font-family:…!important}` 를 해제한다(§3-7).
    이 규칙이 있으면 .mono·JetBrains Mono 지정이 전부 무시돼
    계산서 숫자가 비고정폭으로 나오고 자릿수가 어긋나 보인다.
    로컬 woff2 를 최우선에 둬 기기와 무관하게 같은 글꼴로 출력한다(§14-4). */
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Pretendard','Noto Sans KR Local','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
-html,body{min-height:100vh;background:#fff7ed;color:#0c1a2e;}
+html,body{min-height:100vh;background:#eff5fd;color:#0c1a2e;}
 ::-webkit-scrollbar{width:5px;height:5px;}
-::-webkit-scrollbar-track{background:#fff7ed;}
-::-webkit-scrollbar-thumb{background:#fed7aa;border-radius:10px;}
+::-webkit-scrollbar-track{background:#eff5fd;}
+::-webkit-scrollbar-thumb{background:#c2d9f7;border-radius:10px;}
 input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 input[type="number"]{-moz-appearance:textfield;}
 .mono{font-family:'JetBrains Mono','Courier New',monospace!important;}
@@ -74,8 +75,8 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0 — 헤더+탭바를 하나의 그라데이션 면으로 통합한다(§3-2-1).
    135deg 그라데이션은 하단 가장자리 색이 좌우로 변하므로 탭바를 끝색 단색으로 두면 띠가 갈라진다.
    sticky 는 금지다(§3-1) — 3단 헤더가 162px 이라 모바일 화면의 20% 를 상시 점유한다. */
-.hdr-shell{background:linear-gradient(135deg,#7c2d12 0%,#c2410c 50%,#f97316 100%);
-  box-shadow:0 2px 20px rgba(194,65,12,.35);}
+.hdr-shell{background:linear-gradient(135deg,#0f1a2e 0%,#1b3150 50%,#2d5186 100%);
+  box-shadow:0 2px 20px rgba(45,81,134,.35);}
 .app-header{background:transparent;color:#fff;}
 .header-inner{max-width:1300px;margin:0 auto;padding:20px 24px 16px;
   display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}   /* v5.0-HDR — 마스터 flex-start */
@@ -89,24 +90,24 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0-HDR — line-height normal(17px). 1.7 이면 20.4px 가 되어 마스터 78.2/162.2 가 안 나온다 */
 .hdr-sub{font-size:11px;margin-top:8px;color:#fff;opacity:.85;letter-spacing:.02em;line-height:17px;}
 .hdr-manmin{font-family:'Orbitron',sans-serif!important;font-weight:900;font-size:12px;
-  color:#fed7aa;letter-spacing:.08em;text-shadow:0 0 8px rgba(194,65,12,.6);
+  color:#c2d9f7;letter-spacing:.08em;text-shadow:0 0 8px rgba(45,81,134,.6);
   white-space:nowrap;display:inline-block;line-height:17px;vertical-align:top;}
 .hdr-right-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px;
   padding-bottom:2px;flex-shrink:0;}
 .hdr-right{text-align:right;opacity:.75;color:#fff;font-size:11px;line-height:16px;}   /* v5.0-HDR */
 .hdr-right strong{font-size:13px;font-weight:700;line-height:19px;}
-.hdr-right em{font-size:10px;color:#fed7aa;font-style:normal;display:block;margin-top:4px;line-height:15px;}
+.hdr-right em{font-size:11px;color:#c2d9f7;font-style:normal;display:block;margin-top:4px;line-height:15px;}
 .hdr-btns{display:flex;gap:5px;flex-shrink:0;}
 /* 본문용 버튼 기본형 — 종전 그대로 유지한다 */
 .btn-g{background:#fff;color:#374151;border:1.5px solid #cbd5e1;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
-.btn-g:hover{border-color:#c2410c;color:#c2410c;background:#fff7ed;}
-.btn-b{background:#c2410c;color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
-.btn-b:hover{background:#9a3412;}
+.btn-g:hover{border-color:#2d5186;color:#2d5186;background:#eff5fd;}
+.btn-b{background:#2d5186;color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
+.btn-b:hover{background:#244168;}
 /* ⛔ 헤더 전용 배색은 반드시 .hdr-btns 로 한정한다(§16-5 — 전역 규칙이 본문 버튼을 부순다) */
 .hdr-btns .btn-g{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.35);}
-.hdr-btns .btn-g:hover{background:#fff;color:#c2410c;border-color:#fff;}
-.hdr-btns .btn-b{background:#9a3412;}
-.hdr-btns .btn-b:hover{background:#7c2d12;}
+.hdr-btns .btn-g:hover{background:#fff;color:#2d5186;border-color:#fff;}
+.hdr-btns .btn-b{background:#244168;}
+.hdr-btns .btn-b:hover{background:#1b3150;}
 /* v5.0 헤더 반응형 (§3-1) */
 @media(max-width:768px){ .hdr-right{display:none;} .hdr-right-wrap{gap:0;} }
 @media(max-width:640px){
@@ -131,13 +132,13 @@ input[type="number"]{-moz-appearance:textfield;}
   white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
 .tb:hover{color:#fff;background:rgba(255,255,255,.09);}
 /* v5.0-HDR (2026-09-02 확정) — 활성 탭 단색 배경 + 강조색 바 */
-.tb.active{color:#fff;background:#c2410c;border-bottom-color:#fed7aa;}
+.tb.active{color:#fff;background:#2d5186;border-bottom-color:#c2d9f7;}
 .tb.tb-manual{margin-left:auto;text-decoration:none;white-space:nowrap;}   /* v5.0.2 — 사용자 매뉴얼(탭 막대 오른쪽 끝) · 좁은 화면은 한 줄 · 좌우 밀기 */
 /* v5.0-HDR — 요약 스트립 (마스터 3층) · 라이트 테마에서도 스트립은 마스터 규격 #0f172a */
 .sum-bar-wrap{background:#0f172a;padding:10px 0;}
 .sum-bar{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:14px;}
 .sum-item{font-size:12px;color:#94a3b8;line-height:18px;}
-.sum-item b{font-family:'JetBrains Mono','Noto Sans KR',monospace;font-weight:700;color:#fed7aa;}
+.sum-item b{font-family:'JetBrains Mono','Pretendard Variable',Pretendard,'Noto Sans KR',monospace;font-weight:700;color:#c2d9f7;}
 @media(max-width:640px){.sum-bar{padding:0 14px;}.sum-item{font-size:11px;}}
 
 /* ── LAYOUT ── */
@@ -172,11 +173,11 @@ input[type="number"]{-moz-appearance:textfield;}
 @media screen and (max-width:768px){input,select,textarea{font-size:16px!important;}}
 
 /* ── CARD ── */
-.card{background:#fff;border:1px solid #fde8d0;border-radius:12px;box-shadow:0 1px 4px rgba(194,65,12,.07);overflow:hidden;margin-bottom:12px;}
-.card-head{display:flex;align-items:center;gap:8px;padding:10px 13px;border-bottom:1px solid #fed7aa;}
-.card-ico{width:25px;height:25px;border-radius:6px;background:#fff7ed;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
+.card{background:#fff;border:1px solid #dbeafe;border-radius:12px;box-shadow:0 1px 4px rgba(45,81,134,.07);overflow:hidden;margin-bottom:12px;}
+.card-head{display:flex;align-items:center;gap:8px;padding:10px 13px;border-bottom:1px solid #c2d9f7;}
+.card-ico{width:25px;height:25px;border-radius:6px;background:#eff5fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
 .card-tit{font-size:11px;font-weight:800;color:#0c1a2e;letter-spacing:.04em;flex:1;}
-.cbadge{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:20px;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;white-space:nowrap;}
+.cbadge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;background:#eff5fd;color:#2d5186;border:1px solid #c2d9f7;white-space:nowrap;}
 .cbadge.blue{background:#ecfeff;color:#0e7490;border-color:#a5f3fc;}
 .cbadge.grn{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
 .cbadge.red{background:#fef2f2;color:#dc2626;border-color:#fecaca;}
@@ -184,11 +185,11 @@ input[type="number"]{-moz-appearance:textfield;}
 .card-body{padding:12px 13px;}
 
 /* ── FORM ── */
-.flbl{font-size:9.5px;font-weight:700;color:#6b4c2a;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;display:block;}
-.finput{width:100%;padding:7px 10px;background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;height:38px;box-sizing:border-box;}
-.finput:focus{border-color:#c2410c;box-shadow:0 0 0 3px rgba(194,65,12,.12);background:#fff;}
-.fselect{width:100%;padding:7px 24px 7px 9px;background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:7px;color:#0c1a2e;font-size:11.5px;font-weight:700;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23c2410c' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
-.fselect:focus{border-color:#c2410c;box-shadow:0 0 0 3px rgba(194,65,12,.12);}
+.flbl{font-size:11px;font-weight:700;color:#244168;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;display:block;}
+.finput{width:100%;padding:7px 10px;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;height:38px;box-sizing:border-box;}
+.finput:focus{border-color:#2d5186;box-shadow:0 0 0 3px rgba(45,81,134,.12);background:#fff;}
+.fselect{width:100%;padding:7px 24px 7px 9px;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:7px;color:#0c1a2e;font-size:11.5px;font-weight:700;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23c2410c' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
+.fselect:focus{border-color:#2d5186;box-shadow:0 0 0 3px rgba(45,81,134,.12);}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
 @media(max-width:420px){.frow{grid-template-columns:1fr;}}
 .frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
@@ -197,89 +198,89 @@ input[type="number"]{-moz-appearance:textfield;}
 .fgrp.full{grid-column:1/-1;}
 .input-sfx{display:flex;}
 .input-sfx .finput{border-radius:7px 0 0 7px;}
-.sfx{padding:7px 10px;background:#fff7ed;border:1.5px solid #fcd9aa;border-left:none;border-radius:0 7px 7px 0;font-size:11.5px;font-weight:700;color:#b45309;white-space:nowrap;display:flex;align-items:center;}
+.sfx{padding:7px 10px;background:#eff5fd;border:1.5px solid #c2d9f7;border-left:none;border-radius:0 7px 7px 0;font-size:11.5px;font-weight:700;color:#2d5186;white-space:nowrap;display:flex;align-items:center;}
 
 /* ── NOTICE ── */
 .nb{border-radius:9px;padding:9px 11px;margin-bottom:9px;}
-.nb.org{background:#fff7ed;border:1.5px solid #fed7aa;}
+.nb.org{background:#eff5fd;border:1.5px solid #c2d9f7;}
 .nb.blue{background:#ecfeff;border:1.5px solid #a5f3fc;}
 .nb.grn{background:#f0fdf4;border:1.5px solid #bbf7d0;}
 .nb.red{background:#fef2f2;border:1.5px solid #fecaca;}
-.nb-tit{font-size:10.5px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
-.nb.org .nb-tit{color:#c2410c;}.nb.blue .nb-tit{color:#155e75;}.nb.grn .nb-tit{color:#15803d;}.nb.red .nb-tit{color:#dc2626;}
-.nb-txt{font-size:10.5px;line-height:1.75;}
-.nb.org .nb-txt{color:#78350f;}.nb.blue .nb-txt{color:#164e63;}.nb.grn .nb-txt{color:#14532d;}.nb.red .nb-txt{color:#7f1d1d;}
+.nb-tit{font-size:11px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.nb.org .nb-tit{color:#2d5186;}.nb.blue .nb-tit{color:#155e75;}.nb.grn .nb-tit{color:#15803d;}.nb.red .nb-tit{color:#dc2626;}
+.nb-txt{font-size:11px;line-height:1.75;}
+.nb.org .nb-txt{color:#1b3150;}.nb.blue .nb-txt{color:#164e63;}.nb.grn .nb-txt{color:#14532d;}.nb.red .nb-txt{color:#7f1d1d;}
 
 /* ── STEP BAR ── */
-.step-bar{display:flex;align-items:center;margin-bottom:13px;background:#fff;border:1px solid #fde8d0;border-radius:10px;padding:8px 12px;overflow-x:auto;gap:0;scrollbar-width:none;}
+.step-bar{display:flex;align-items:center;margin-bottom:13px;background:#fff;border:1px solid #dbeafe;border-radius:10px;padding:8px 12px;overflow-x:auto;gap:0;scrollbar-width:none;}
 .step-bar::-webkit-scrollbar{display:none;}
 .step-item{display:flex;align-items:center;gap:5px;flex-shrink:0;}
-.sc{width:22px;height:22px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all .2s;}
+.sc{width:22px;height:22px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all .2s;}
 .sc.done{background:#22c55e;color:#fff;}
-.sc.active{background:#c2410c;color:#fff;box-shadow:0 0 0 3px rgba(194,65,12,.2);}
-.sl{font-size:10.5px;font-weight:700;color:#94a3b8;white-space:nowrap;}
-.sl.active{color:#c2410c;}.sl.done{color:#16a34a;}
+.sc.active{background:#2d5186;color:#fff;box-shadow:0 0 0 3px rgba(45,81,134,.2);}
+.sl{font-size:11px;font-weight:700;color:#94a3b8;white-space:nowrap;}
+.sl.active{color:#2d5186;}.sl.done{color:#16a34a;}
 .sdiv{width:16px;height:2px;background:#e2e8f0;margin:0 3px;flex-shrink:0;transition:background .2s;}
 .sdiv.done{background:#22c55e;}
 
 /* ── BUILDING TYPE GRID ── */
 .btype-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;}
 @media(max-width:480px){.btype-grid{grid-template-columns:repeat(2,1fr);}}
-.btype-btn{background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:9px;padding:9px 6px;text-align:center;cursor:pointer;transition:all .18s;position:relative;}
-.btype-btn:hover{border-color:#c2410c;background:#fff7ed;}
-.btype-btn.sel{border-color:#c2410c;background:#fff7ed;box-shadow:0 0 0 2px rgba(194,65,12,.15);}
-.btype-btn.sel::after{content:'✓';position:absolute;top:4px;right:6px;font-size:9px;font-weight:900;color:#c2410c;}
+.btype-btn{background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:9px 6px;text-align:center;cursor:pointer;transition:all .18s;position:relative;}
+.btype-btn:hover{border-color:#2d5186;background:#eff5fd;}
+.btype-btn.sel{border-color:#2d5186;background:#eff5fd;box-shadow:0 0 0 2px rgba(45,81,134,.15);}
+.btype-btn.sel::after{content:'✓';position:absolute;top:4px;right:6px;font-size:11px;font-weight:900;color:#2d5186;}
 .btype-ico{font-size:20px;margin-bottom:3px;}
-.btype-nm{font-size:9.5px;font-weight:800;color:#7c2d12;}
-.btype-val{font-size:8.5px;font-weight:700;color:#b45309;margin-top:1px;}
+.btype-nm{font-size:11px;font-weight:800;color:#1b3150;}
+.btype-val{font-size:11px;font-weight:700;color:#2d5186;margin-top:1px;}
 
 /* ── RESULT HERO ── */
 .result-hero{padding:17px;border-radius:12px;color:#fff;text-align:center;margin-bottom:12px;}
-.rh-orange{background:linear-gradient(135deg,#7c2d12,#c2410c);}
+.rh-orange{background:linear-gradient(135deg,#1b3150,#2d5186);}
 .rh-blue{background:linear-gradient(135deg,#164e63,#0e7490);}
 .rh-green{background:linear-gradient(135deg,#14532d,#15803d);}
 .rh-pur{background:linear-gradient(135deg,#581c87,#7e22ce);}
-.rh-sub{font-size:10px;opacity:.7;margin-bottom:3px;font-weight:600;}
+.rh-sub{font-size:11px;opacity:.7;margin-bottom:3px;font-weight:600;}
 .rh-val{font-size:32px;font-weight:900;font-family:'JetBrains Mono',monospace!important;color:#fde047;line-height:1;}
 .rh-unit{font-size:12px;opacity:.75;margin-top:2px;font-weight:700;}
-.rh-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:3px 9px;font-size:9.5px;font-weight:700;margin-top:8px;}
+.rh-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:3px 9px;font-size:11px;font-weight:700;margin-top:8px;}
 
 /* ── RESULT TABLE ── */
 .rtbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px;}
-.rtbl th{background:#fff7ed;padding:7px 8px;text-align:center;font-weight:800;color:#92400e;border:1px solid #fed7aa;font-size:10px;}
-.rtbl td{padding:6px 8px;text-align:center;border:1px solid #fde8d0;font-weight:600;color:#0c1a2e;}
-.rtbl tr:nth-child(even) td{background:#fffbf7;}
-.rtbl tr.hl td{background:#fff7ed!important;font-weight:900;color:#c2410c;}
-.rtbl .total td{background:#7c2d12!important;color:#fde047!important;font-weight:900;}
+.rtbl th{background:#eff5fd;padding:7px 8px;text-align:center;font-weight:800;color:#244168;border:1px solid #c2d9f7;font-size:11px;}
+.rtbl td{padding:6px 8px;text-align:center;border:1px solid #dbeafe;font-weight:600;color:#0c1a2e;}
+.rtbl tr:nth-child(even) td{background:#eff5fd;}
+.rtbl tr.hl td{background:#eff5fd!important;font-weight:900;color:#2d5186;}
+.rtbl .total td{background:#1b3150!important;color:#fde047!important;font-weight:900;}
 
 /* ── CALC BUTTON ── */
-.calc-btn{width:100%;padding:13px;background:linear-gradient(135deg,#c2410c,#b45309);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.02em;}
-.calc-btn:hover{background:linear-gradient(135deg,#9a3412,#92400e);transform:translateY(-1px);box-shadow:0 4px 16px rgba(194,65,12,.4);}
+.calc-btn{width:100%;padding:13px;background:linear-gradient(135deg,#2d5186,#2d5186);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.02em;}
+.calc-btn:hover{background:linear-gradient(135deg,#244168,#244168);transform:translateY(-1px);box-shadow:0 4px 16px rgba(45,81,134,.4);}
 .calc-btn:active{transform:translateY(0);}
-.reset-btn{width:100%;padding:9px;background:#fff;color:#7c2d12;border:1.5px solid #fcd9aa;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s;margin-top:7px;}
-.reset-btn:hover{border-color:#c2410c;background:#fff7ed;}
+.reset-btn{width:100%;padding:9px;background:#fff;color:#1b3150;border:1.5px solid #c2d9f7;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s;margin-top:7px;}
+.reset-btn:hover{border-color:#2d5186;background:#eff5fd;}
 
 /* ── FORMULA BOX ── */
-.formula-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px 13px;margin-bottom:10px;}
-.formula-title{font-size:10px;font-weight:800;color:#92400e;margin-bottom:7px;display:flex;align-items:center;gap:5px;}
-.formula-eq{font-family:'JetBrains Mono',monospace!important;font-size:11px;font-weight:700;color:#7c2d12;background:#fff;border:1px solid #fcd9aa;border-radius:6px;padding:7px 10px;margin-bottom:5px;line-height:1.7;}
-.formula-note{font-size:10px;color:#92400e;line-height:1.65;}
+.formula-box{background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:11px 13px;margin-bottom:10px;}
+.formula-title{font-size:11px;font-weight:800;color:#244168;margin-bottom:7px;display:flex;align-items:center;gap:5px;}
+.formula-eq{font-family:'JetBrains Mono',monospace!important;font-size:11px;font-weight:700;color:#1b3150;background:#fff;border:1px solid #c2d9f7;border-radius:6px;padding:7px 10px;margin-bottom:5px;line-height:1.7;}
+.formula-note{font-size:11px;color:#244168;line-height:1.65;}
 
 /* ── GUIDE TABLE ── */
 .gtbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px;}
-.gtbl th{background:#fff7ed;padding:7px 8px;text-align:center;font-weight:800;color:#92400e;border:1px solid #fed7aa;font-size:10px;}
-.gtbl td{padding:6px 8px;text-align:center;border:1px solid #fde8d0;font-weight:600;color:#0c1a2e;}
-.gtbl tr:nth-child(even) td{background:#fffbf7;}
-.gtbl .hl td{background:#fff7ed!important;font-weight:900;color:#c2410c;}
+.gtbl th{background:#eff5fd;padding:7px 8px;text-align:center;font-weight:800;color:#244168;border:1px solid #c2d9f7;font-size:11px;}
+.gtbl td{padding:6px 8px;text-align:center;border:1px solid #dbeafe;font-weight:600;color:#0c1a2e;}
+.gtbl tr:nth-child(even) td{background:#eff5fd;}
+.gtbl .hl td{background:#eff5fd!important;font-weight:900;color:#2d5186;}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(20px);background:#7c2d12;color:#fff;padding:10px 18px;border-radius:10px;font-size:12px;font-weight:700;z-index:9999;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(124,45,18,.45);}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(20px);background:#1b3150;color:#fff;padding:10px 18px;border-radius:10px;font-size:12px;font-weight:700;z-index:9999;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(27,49,80,.45);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* ── GUIDE MODAL TABS ── */
-.gm-tab{background:none;border:none;padding:9px 13px;font-size:10.5px;font-weight:700;color:#92400e;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:all .15s;}
-.gm-tab:hover{color:#7c2d12;background:rgba(124,45,18,.06);}
-.gm-tab.active{color:#c2410c;border-bottom-color:#c2410c;background:#fff;}
+.gm-tab{background:none;border:none;padding:9px 13px;font-size:11px;font-weight:700;color:#244168;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:all .15s;}
+.gm-tab:hover{color:#1b3150;background:rgba(27,49,80,.06);}
+.gm-tab.active{color:#2d5186;border-bottom-color:#2d5186;background:#fff;}
 .gm-panel{display:none;}.gm-panel.active{display:block;}
 /* ── FAB ── */
 /* v5.0 — 우측 하단 FAB 스택 (§16-18 · 20 건물우수 규격).
@@ -289,17 +290,17 @@ input[type="number"]{-moz-appearance:textfield;}
 .fab-wrap{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom, 0px));right:16px;z-index:1100;
   display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
 .fab-btn{
-  background:linear-gradient(135deg,#7c2d12,#c2410c);
+  background:linear-gradient(135deg,#1b3150,#2d5186);
   color:#fff;border:none;border-radius:14px;
   padding:10px 8px;cursor:pointer;width:68px;min-width:68px;position:relative;   /* 두 버튼 폭·높이 완전 동일 */
-  box-shadow:0 4px 20px rgba(194,65,12,.45);
+  box-shadow:0 4px 20px rgba(45,81,134,.45);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   line-height:1.3;transition:transform .15s,box-shadow .15s;
   font-family:inherit;
 }
-.fab-btn:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(194,65,12,.6);}
+.fab-btn:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(45,81,134,.6);}
 .fab-btn .fi-icon{font-size:20px;line-height:1;}
-.fab-btn .fi-lbl{font-size:10px;font-weight:800;letter-spacing:.04em;white-space:nowrap;}
+.fab-btn .fi-lbl{font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap;}
 @media(max-width:640px){.fab-wrap{bottom:calc(16px + env(safe-area-inset-bottom, 0px));right:14px;gap:7px;}}
 
 /* ── GUIDE MODAL ── */
@@ -309,12 +310,12 @@ input[type="number"]{-moz-appearance:textfield;}
 .modal-box{background:#fff;border-radius:15px 15px 0 0;width:100%;max-width:600px;max-height:85vh;overflow-y:auto;animation:modal-up .3s cubic-bezier(.22,.61,.36,1);}
 @media(min-width:600px){.modal-box{border-radius:15px;max-height:80vh;margin:16px;}}
 @keyframes modal-up{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-head{padding:15px 17px 13px;border-bottom:1px solid #fde8d0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;border-radius:15px 15px 0 0;}
-.modal-tit{font-size:14px;font-weight:900;color:#92400e;}
-.modal-cls{width:29px;height:29px;border:none;background:#fff7ed;border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
-.modal-cls:hover{background:#fde8d0;}
+.modal-head{padding:15px 17px 13px;border-bottom:1px solid #dbeafe;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;border-radius:15px 15px 0 0;}
+.modal-tit{font-size:14px;font-weight:900;color:#244168;}
+.modal-cls{width:29px;height:29px;border:none;background:#eff5fd;border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.modal-cls:hover{background:#dbeafe;}
 .modal-body{padding:15px 17px;}
-.modal-sec{font-size:11px;font-weight:900;color:#92400e;margin:13px 0 7px;display:flex;align-items:center;gap:5px;border-left:3px solid #c2410c;padding-left:8px;}
+.modal-sec{font-size:11px;font-weight:900;color:#244168;margin:13px 0 7px;display:flex;align-items:center;gap:5px;border-left:3px solid #2d5186;padding-left:8px;}
 
 /* ── PRINT: 아래 통합 블록으로 이전 ── */
 
@@ -325,41 +326,41 @@ input[type="number"]{-moz-appearance:textfield;}
 }
 
 /* ── SUMMARY CARD ── */
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid #fde8d0;}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid #dbeafe;}
 .sum-row:last-child{border-bottom:none;}
-.sum-k{font-size:10.5px;font-weight:700;color:#6b4c2a;}
-.sum-v{font-size:11.5px;font-weight:900;color:#c2410c;font-family:'JetBrains Mono',monospace!important;}
+.sum-k{font-size:11px;font-weight:700;color:#244168;}
+.sum-v{font-size:11.5px;font-weight:900;color:#2d5186;font-family:'JetBrains Mono',monospace!important;}
 
 /* ── RESULT HIDDEN ── */
 #resultPanel{display:none;}
 /* ═══ A4 export toolbar ═══ */
-.export-bar{display:flex;gap:8px;padding:10px 14px;background:#fff;border-bottom:1px solid #fde8d0;flex-wrap:wrap;align-items:center;}
-.export-bar .bar-lbl{font-size:10.5px;font-weight:800;color:#5c7a8a;margin-right:4px;}
-.export-status{font-size:10.5px;font-weight:700;color:#c2410c;margin-left:4px;}
+.export-bar{display:flex;gap:8px;padding:10px 14px;background:#fff;border-bottom:1px solid #dbeafe;flex-wrap:wrap;align-items:center;}
+.export-bar .bar-lbl{font-size:11px;font-weight:800;color:#5c7a8a;margin-right:4px;}
+.export-status{font-size:11px;font-weight:700;color:#2d5186;margin-left:4px;}
 /* v5.0 — JPG 저장 시트 (§3-5). 1매여도 미리보기 시트를 띄운다. */
-#mm-save-ov{display:none;position:fixed;inset:0;z-index:9999;background:rgba(46,26,12,.82);
+#mm-save-ov{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,26,46,.82);
   align-items:center;justify-content:center;padding:18px;}
 #mm-save-ov.show{display:flex;}
-.mm-sheet{background:#fff;border:1px solid #fed7aa;border-radius:14px;width:100%;max-width:720px;
+.mm-sheet{background:#fff;border:1px solid #c2d9f7;border-radius:14px;width:100%;max-width:720px;
   max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45);}
 .mm-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:14px 18px;border-bottom:1px solid #fde8d0;}
+  padding:14px 18px;border-bottom:1px solid #dbeafe;}
 .mm-sheet-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:900;
-  letter-spacing:.12em;color:#c2410c;text-transform:uppercase;}
-.mm-sheet-note{font-size:11px;color:#92400e;margin-top:4px;}
+  letter-spacing:.12em;color:#2d5186;text-transform:uppercase;}
+.mm-sheet-note{font-size:11px;color:#244168;margin-top:4px;}
 .mm-sheet-body{padding:16px 18px;overflow-y:auto;display:grid;
   grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
-.mm-shot{background:#fffbf7;border:1px solid #fde8d0;border-radius:9px;padding:9px;
+.mm-shot{background:#eff5fd;border:1px solid #dbeafe;border-radius:9px;padding:9px;
   display:flex;flex-direction:column;gap:8px;}
-.mm-shot img{width:100%;height:auto;border-radius:4px;background:#fff;display:block;border:1px solid #fde8d0;}
+.mm-shot img{width:100%;height:auto;border-radius:4px;background:#fff;display:block;border:1px solid #dbeafe;}
 .mm-shot-btn{display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 10px;
-  border-radius:7px;border:1px solid #fcd9aa;background:none;color:#c2410c;
+  border-radius:7px;border:1px solid #c2d9f7;background:none;color:#2d5186;
   font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:background .15s;}
-.mm-shot-btn:hover{background:#fff7ed;}
+.mm-shot-btn:hover{background:#eff5fd;}
 .mm-sheet-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;
-  padding:13px 18px;border-top:1px solid #fde8d0;}
+  padding:13px 18px;border-top:1px solid #dbeafe;}
 .mm-btn-close{background:#e2e8f0;color:#334155;}
-.mm-btn-jpg{background:#c2410c;color:#fff;}
+.mm-btn-jpg{background:#2d5186;color:#fff;}
 /* ⛔ v5.0 — 시트 헤더는 좌측 텍스트가 폭을 갖고 닫기 버튼이 줄어들어야 한다(§16-5). */
 .mm-sheet-head > div:first-child{flex:1 1 auto;min-width:0;}
 .mm-sheet-head .btn-exp{flex:0 0 auto;}
@@ -370,9 +371,9 @@ input[type="number"]{-moz-appearance:textfield;}
   .mm-sheet-body.multi{grid-template-columns:repeat(2,1fr);}
   .mm-sheet-foot{justify-content:stretch;} .mm-sheet-foot .btn-exp{flex:1;}
   .mm-sheet-head{padding:12px 14px;gap:8px;}
-  .mm-sheet-title{font-size:10px;}
-  .mm-sheet-note{font-size:10px;line-height:1.45;}
-  .mm-sheet-head .btn-exp{padding:6px 9px!important;font-size:10.5px!important;align-self:flex-start;}
+  .mm-sheet-title{font-size:11px;}
+  .mm-sheet-note{font-size:11px;line-height:1.45;}
+  .mm-sheet-head .btn-exp{padding:6px 9px!important;font-size:11px!important;align-self:flex-start;}
   .mm-shot{padding:7px;} .mm-shot-btn{padding:6px;font-size:11px;}
   .mm-shot img{max-height:46vh;object-fit:contain;}
 }
@@ -398,17 +399,17 @@ input[type="number"]{-moz-appearance:textfield;}
 .a4-page{font-family:'Noto Sans KR Local','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
 .a4-page .mono,.a4-page code,.a4-page kbd{font-family:'JetBrains Mono','Noto Sans KR Local',monospace;}
 /* v5.0 — A4 양식은 21 위생배관 기준본 규격을 따른다(§15-9). 종전 값이 기준본보다 14~27% 작았다. */
-.a4-tit{font-size:22px;font-weight:900;color:#7c2d12;text-align:center;border-bottom:2.5px solid #c2410c;padding-bottom:9px;margin-bottom:12px;letter-spacing:-.02em;}
-.a4-sub{font-size:13px;font-weight:800;color:#c2410c;margin-bottom:4px;margin-top:9px;padding-left:7px;border-left:3px solid #c2410c;text-align:left;}
+.a4-tit{font-size:22px;font-weight:900;color:#1b3150;text-align:center;border-bottom:2.5px solid #2d5186;padding-bottom:9px;margin-bottom:12px;letter-spacing:-.02em;}
+.a4-sub{font-size:13px;font-weight:800;color:#2d5186;margin-bottom:4px;margin-top:9px;padding-left:7px;border-left:3px solid #2d5186;text-align:left;}
 .a4-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:7px;}
-.a4-tbl th{background:#fff7ed;padding:5px 6px;text-align:center;font-weight:700;font-size:11px;color:#7c2d12;border:1px solid #fed7aa;}
-.a4-tbl td{padding:5px 7px;border:1px solid #fde8d0;font-weight:600;line-height:1.5;color:#111827;}
-.a4-tbl tr:nth-child(even) td{background:#fffbf7;}
-.a4-tbl .hl td{background:#fff7ed!important;font-weight:900;color:#c2410c;}
-.a4-th{background:#fff7ed!important;font-weight:800!important;}
+.a4-tbl th{background:#eff5fd;padding:5px 6px;text-align:center;font-weight:700;font-size:11px;color:#1b3150;border:1px solid #c2d9f7;}
+.a4-tbl td{padding:5px 7px;border:1px solid #dbeafe;font-weight:600;line-height:1.5;color:#111827;}
+.a4-tbl tr:nth-child(even) td{background:#eff5fd;}
+.a4-tbl .hl td{background:#eff5fd!important;font-weight:900;color:#2d5186;}
+.a4-th{background:#eff5fd!important;font-weight:800!important;}
 .a4-hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px;}
 .a4-hbox{border-radius:8px;padding:10px;text-align:center;color:#fff;}
-.a4-hbox.orange{background:linear-gradient(135deg,#7c2d12,#c2410c);}
+.a4-hbox.orange{background:linear-gradient(135deg,#1b3150,#2d5186);}
 .a4-hbox.blue{background:linear-gradient(135deg,#164e63,#0e7490);}
 .a4-hbox.green{background:linear-gradient(135deg,#14532d,#15803d);}
 .a4-hbox.pur{background:linear-gradient(135deg,#581c87,#7e22ce);}
@@ -416,7 +417,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .a4-hbox-val{font-size:20px;font-weight:900;color:#fde047;line-height:1;font-family:'JetBrains Mono',monospace;}
 .a4-hbox-unit{font-size:9px;opacity:.75;margin-top:2px;}
 /* v5.0 — 푸터 3분할 (§3-4). 인쇄에서는 flex 가 어긋나므로 table-cell 33.33% 로 고정한다. */
-.a4-footer{border-top:1px solid #fde8d0;padding-top:8px;font-size:9px;color:#9ca3af;margin-top:16px;line-height:1.6;font-weight:600;display:table;width:100%;table-layout:fixed;}
+.a4-footer{border-top:1px solid #dbeafe;padding-top:8px;font-size:9px;color:#9ca3af;margin-top:16px;line-height:1.6;font-weight:600;display:table;width:100%;table-layout:fixed;}
 .a4-footer>span{display:table-cell;width:33.33%;vertical-align:top;}
 .a4-footer>span:nth-child(2){text-align:center;}
 .a4-footer>span:nth-child(3){text-align:right;}
@@ -480,75 +481,84 @@ input[type="number"]{-moz-appearance:textfield;}
 /* ── PWA 설치 버튼 ── */
 #pwa-install-btn{
   display:none;align-items:center;gap:5px;
-  background:linear-gradient(135deg,#c2410c,#b45309);
+  background:linear-gradient(135deg,#2d5186,#2d5186);
   color:#fff;border:none;padding:6px 12px;border-radius:8px;
   font-size:11px;font-weight:800;cursor:pointer;
   font-family:inherit;white-space:nowrap;flex-shrink:0;
   transition:all .15s;animation:pwa-glow 2.2s ease-in-out infinite;
 }
 #pwa-install-btn.visible{display:flex;}
-#pwa-install-btn:hover{background:linear-gradient(135deg,#9a3412,#92400e);transform:translateY(-1px);animation:none;}
+#pwa-install-btn:hover{background:linear-gradient(135deg,#244168,#244168);transform:translateY(-1px);animation:none;}
 @keyframes pwa-glow{
-  0%,100%{box-shadow:0 0 0 0 rgba(194,65,12,.5);}
-  50%{box-shadow:0 0 0 7px rgba(194,65,12,0);}
+  0%,100%{box-shadow:0 0 0 0 rgba(45,81,134,.5);}
+  50%{box-shadow:0 0 0 7px rgba(45,81,134,0);}
 }
 @media(max-width:480px){#pwa-install-btn .pwa-txt{display:none;}}
 /* ── PWA iOS 안내 모달 ── */
 #ios-guide-modal{
   position:fixed;bottom:0;left:0;right:0;z-index:10000;
-  background:linear-gradient(135deg,#7c2d12,#c2410c);
-  border-top:2px solid rgba(255,220,180,.4);
+  background:linear-gradient(135deg,#1b3150,#2d5186);
+  border-top:2px solid rgba(194,217,247,.4);
   border-radius:20px 20px 0 0;
   padding:22px 20px calc(18px + env(safe-area-inset-bottom,0px));
   display:none;
-  box-shadow:0 -8px 40px rgba(194,65,12,.55);
+  box-shadow:0 -8px 40px rgba(45,81,134,.55);
   animation:banner-up .35s cubic-bezier(.22,.61,.36,1);
 }
 #ios-guide-modal.show{display:block;}
 /* ── PWA 설치 배너 ── */
 #pwa-banner{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
-  background:linear-gradient(135deg,#7c2d12,#c2410c);
-  border-top:1px solid rgba(255,200,150,.3);
+  background:linear-gradient(135deg,#1b3150,#2d5186);
+  border-top:1px solid rgba(156,195,245,.3);
   padding:14px 18px;border-radius:16px 16px 0 0;
-  box-shadow:0 -6px 28px rgba(194,65,12,.45);
+  box-shadow:0 -6px 28px rgba(45,81,134,.45);
   animation:banner-up .35s cubic-bezier(.16,1,.3,1);
 }
 #pwa-banner.visible{display:block;}
 @keyframes banner-up{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .pwa-inner{max-width:540px;margin:0 auto;display:flex;align-items:center;gap:12px;}
-.pwa-icon-wrap{width:50px;height:50px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1.5px solid rgba(255,200,150,.4);}
+.pwa-icon-wrap{width:50px;height:50px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1.5px solid rgba(156,195,245,.4);}
 .pwa-icon-wrap img{width:100%;height:100%;object-fit:cover;}
 .pwa-texts{flex:1;min-width:0;}
-.pwa-title{font-size:.88rem;font-weight:900;color:#ffe4cc;margin-bottom:2px;}
-.pwa-desc{font-size:.72rem;color:#fcd9aa;line-height:1.5;}
+.pwa-title{font-size:.88rem;font-weight:900;color:#dbeafe;margin-bottom:2px;}
+.pwa-desc{font-size:.72rem;color:#c2d9f7;line-height:1.5;}
 .pwa-btns{display:flex;gap:7px;flex-shrink:0;}
 .pwa-ok{background:#fff;color:#c2410c;border:none;padding:9px 16px;border-radius:7px;font-size:.8rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;}
 .pwa-ok:hover{background:#ffedd5;}
-.pwa-no{background:rgba(255,255,255,.1);color:#fcd9aa;border:1px solid rgba(255,200,150,.3);padding:9px 11px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.pwa-no{background:rgba(255,255,255,.1);color:#c2d9f7;border:1px solid rgba(156,195,245,.3);padding:9px 11px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
 .pwa-no:hover{color:#fff;}
 @media(max-width:420px){.pwa-desc{display:none;}}
 /* ── iOS 안내 스텝 ── */
 .ios-step{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;margin-bottom:8px;}
-.ios-num{min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,200,150,.4);color:#ffe4cc;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.ios-txt{font-size:13px;color:#fcd9aa;line-height:1.5;}
+.ios-num{min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(156,195,245,.4);color:#dbeafe;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ios-txt{font-size:13px;color:#c2d9f7;line-height:1.5;}
 .ios-txt strong{color:#fff;}
 .ios-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .ios-ttl{font-size:15px;font-weight:800;color:#fff;}
 .ios-cls{background:rgba(255,255,255,.12);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.ios-foot{text-align:center;font-size:11px;color:#fcd9aa;margin-top:12px;}
+.ios-foot{text-align:center;font-size:11px;color:#c2d9f7;margin-top:12px;}
 </style>
 <style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver5.0] 이 담당 */
 #dev-stamp,#dev-stamp-print,.dev-stamp{display:none!important;}
 @media print{#dev-stamp,#dev-stamp-print,.dev-stamp{display:none!important;}}</style>
 <style id="mm-r24b">/* R24 ①② (2026-09-05 · S10 3-B 소급 · 지시서 §21-1 R24) — 인쇄 시 collapse 표의 우측 세로선 소실 → separate + 셀 자체 선. 화면·JPG·PDF 동일 DOM(§2②). 선색은 기존 값 유지. */
 .a4-tbl{border-collapse:separate;border-spacing:0;border:0;}
-.a4-tbl th{border:0;border-right:1px solid #fed7aa;border-bottom:1px solid #fed7aa;}
-.a4-tbl th:first-child{border-left:1px solid #fed7aa;}
-.a4-tbl tr:first-child th{border-top:1px solid #fed7aa;}
-.a4-tbl td{border:0;border-right:1px solid #fde8d0;border-bottom:1px solid #fde8d0;}
-.a4-tbl td:first-child{border-left:1px solid #fde8d0;}
-.a4-tbl tr:first-child td{border-top:1px solid #fde8d0;}
+.a4-tbl th{border:0;border-right:1px solid #c2d9f7;border-bottom:1px solid #c2d9f7;}
+.a4-tbl th:first-child{border-left:1px solid #c2d9f7;}
+.a4-tbl tr:first-child th{border-top:1px solid #c2d9f7;}
+.a4-tbl td{border:0;border-right:1px solid #dbeafe;border-bottom:1px solid #dbeafe;}
+.a4-tbl td:first-child{border-left:1px solid #dbeafe;}
+.a4-tbl tr:first-child td{border-top:1px solid #dbeafe;}
+</style>
+<style id="mm-foot-css">/* 하단 버전 표시 — 건축 도구와 같은 형식 · 화면 폭 전체 (2026-10-31) */
+footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;background:#fff;padding:20px;margin-top:10px;width:100%;box-sizing:border-box;align-self:stretch;font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif}
+.mm-foot .foot-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.mm-foot .foot-nm{font-weight:900;font-size:13px;color:#2d5186;letter-spacing:.06em}
+.mm-foot .foot-desc{font-size:11px;color:#64748b;line-height:1.6}
+.mm-foot .foot-copy{font-size:11px;color:#64748b;font-family:'DM Mono',ui-monospace,monospace}
+@media screen{sub,sup{font-size:max(.75em,11px)}[class*="a4"] sub,[class*="a4"] sup,#report-zone sub,#report-zone sup{font-size:smaller}}
+@media print{footer.mm-foot{display:none!important}}
 </style>
 </head>
 <body>
@@ -668,7 +678,7 @@ input[type="number"]{-moz-appearance:textfield;}
           </div>
           <div class="fgrp" style="margin-top:8px;">
             <label class="flbl">선택된 용도</label>
-            <input class="finput" id="selectedBtype" readonly placeholder="위에서 용도를 선택하세요" style="background:#fffbf7;cursor:default;"/>
+            <input class="finput" id="selectedBtype" readonly placeholder="위에서 용도를 선택하세요" style="background:#eff5fd;cursor:default;"/>
           </div>
         </div>
       </div>
@@ -799,12 +809,12 @@ input[type="number"]{-moz-appearance:textfield;}
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
         <div class="result-hero rh-blue" style="margin-bottom:0;padding:14px;">
-          <div class="rh-sub" style="font-size:9px;">시간 최대급탕량</div>
+          <div class="rh-sub" style="font-size:11px;">시간 최대급탕량</div>
           <div class="rh-val mono" id="r_hourly" style="font-size:24px;">—</div>
           <div class="rh-unit">L/h</div>
         </div>
         <div class="result-hero rh-green" style="margin-bottom:0;padding:14px;">
-          <div class="rh-sub" style="font-size:9px;">분 최대급탕량</div>
+          <div class="rh-sub" style="font-size:11px;">분 최대급탕량</div>
           <div class="rh-val mono" id="r_perMin" style="font-size:24px;">—</div>
           <div class="rh-unit">L/min</div>
         </div>
@@ -851,8 +861,8 @@ input[type="number"]{-moz-appearance:textfield;}
       <div class="card">
         <div class="card-body" style="text-align:center;padding:40px 20px;">
           <div style="font-size:48px;margin-bottom:12px;">🔥</div>
-          <div style="font-size:14px;font-weight:800;color:#7c2d12;margin-bottom:8px;">급탕량 · 보일러 출력 산정</div>
-          <div style="font-size:12px;color:#92400e;line-height:1.7;">① 건물 용도를 선택하세요<br>② 사용인원과 온도 조건을 입력하세요<br>③ 산정 버튼을 클릭하면 결과가 표시됩니다</div>
+          <div style="font-size:14px;font-weight:800;color:#1b3150;margin-bottom:8px;">급탕량 · 보일러 출력 산정</div>
+          <div style="font-size:12px;color:#244168;line-height:1.7;">① 건물 용도를 선택하세요<br>② 사용인원과 온도 조건을 입력하세요<br>③ 산정 버튼을 클릭하면 결과가 표시됩니다</div>
         </div>
       </div>
       <div class="nb org">
@@ -1019,17 +1029,17 @@ input[type="number"]{-moz-appearance:textfield;}
   <div class="modal-box" style="max-width:660px;">
     <div class="modal-head">
       <div style="display:flex;align-items:center;gap:9px;">
-        <div style="width:32px;height:32px;background:#c2410c;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🔥</div>
+        <div style="width:32px;height:32px;background:#2d5186;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🔥</div>
         <div>
           <div class="modal-tit">급탕량·보일러 출력 산정 시스템 안내</div>
-          <div style="font-size:9px;color:#b45309;font-weight:700;margin-top:1px;">MANMIN-Ver5.0 · 기계설비 기술기준 별표 5 · KDS 31 30 20:2021</div>
+          <div style="font-size:11px;color:#2d5186;font-weight:700;margin-top:1px;">MANMIN-Ver5.0 · 기계설비 기술기준 별표 5 · KDS 31 30 20:2021</div>
         </div>
       </div>
       <button class="modal-cls" onclick="closeGuide()">✕</button>
     </div>
 
     <!-- 탭 네비게이션 -->
-    <div style="display:flex;background:#fff7ed;border-bottom:1px solid #fed7aa;overflow-x:auto;scrollbar-width:none;">
+    <div style="display:flex;background:#eff5fd;border-bottom:1px solid #c2d9f7;overflow-x:auto;scrollbar-width:none;">
       <button class="gm-tab active" id="gmt-0" onclick="switchGuideTab(0)">📱 웹 사용법</button>
       <button class="gm-tab" id="gmt-1" onclick="switchGuideTab(1)">🔢 산정 절차</button>
       <button class="gm-tab" id="gmt-2" onclick="switchGuideTab(2)">🌡️ 온도·계수</button>
@@ -1049,41 +1059,41 @@ input[type="number"]{-moz-appearance:textfield;}
         <!-- 탭 구조 안내 -->
         <div class="modal-sec">🗂️ 화면 구성 — 5개 탭</div>
         <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:13px;">
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:10px;">
-            <div style="min-width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;">🔢</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:10px;">
+            <div style="min-width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;">🔢</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">급탕량·출력 산정 탭 <span style="font-size:9px;font-weight:700;background:#c2410c;color:#fff;padding:1px 6px;border-radius:10px;margin-left:4px;">메인</span></div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.7;">공사명·작성자 입력 → 건물 용도 선택 → 사용인원·온도 입력 → ⚡ 산정 버튼 클릭 → 결과 자동 표시</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">급탕량·출력 산정 탭 <span style="font-size:11px;font-weight:700;background:#2d5186;color:#fff;padding:1px 6px;border-radius:10px;margin-left:4px;">메인</span></div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.7;">공사명·작성자 입력 → 건물 용도 선택 → 사용인원·온도 입력 → ⚡ 산정 버튼 클릭 → 결과 자동 표시</div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:9px;padding:10px;">
-            <div style="min-width:28px;height:28px;border-radius:50%;background:#b45309;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📋</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:10px;">
+            <div style="min-width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📋</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">기준값 참조표 탭</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.7;">건물 용도별 1일 급탕량 원단위(MANMIN 참고값) 및 표준 사용시간 일람표. 온도 환산 방법 포함.</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">기준값 참조표 탭</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.7;">건물 용도별 1일 급탕량 원단위(MANMIN 참고값) 및 표준 사용시간 일람표. 온도 환산 방법 포함.</div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:9px;padding:10px;">
-            <div style="min-width:28px;height:28px;border-radius:50%;background:#b45309;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📐</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:10px;">
+            <div style="min-width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📐</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">산정 공식 탭</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.7;">1일 급탕량 → 시간 급탕량 → 보일러 열량 → kW 환산까지 전 과정의 산정식 및 주요 설계 규정 정리.</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">산정 공식 탭</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.7;">1일 급탕량 → 시간 급탕량 → 보일러 열량 → kW 환산까지 전 과정의 산정식 및 주요 설계 규정 정리.</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:flex-start;background:#ecfeff;border:1.5px solid #a5f3fc;border-radius:9px;padding:10px;">
             <div style="min-width:28px;height:28px;border-radius:50%;background:#0e7490;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">📄</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#164e63;margin-bottom:3px;">A4 미리보기 탭</div>
-              <div style="font-size:10.5px;color:#164e63;line-height:1.7;">산정 결과를 ISO A4 산정서로 미리보기. <b>🖨️ 인쇄</b> · <b>📕 PDF 저장</b> · <b>🖼️ JPG 저장</b> 3가지 출력 가능.</div>
+              <div style="font-size:11px;color:#164e63;line-height:1.7;">산정 결과를 ISO A4 산정서로 미리보기. <b>🖨️ 인쇄</b> · <b>📕 PDF 저장</b> · <b>🖼️ JPG 저장</b> 3가지 출력 가능.</div>
             </div>
           </div>
         </div>
 
         <!-- FAB 버튼 안내 -->
         <div class="modal-sec">❓ 우측 하단 버튼</div>
-        <div style="display:flex;gap:12px;align-items:center;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:12px;margin-bottom:12px;">
-          <div style="width:44px;height:44px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 3px 10px rgba(194,65,12,.4);">❓</div>
-          <div style="font-size:10.5px;color:#78350f;line-height:1.75;">
+        <div style="display:flex;gap:12px;align-items:center;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:12px;margin-bottom:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 3px 10px rgba(45,81,134,.4);">❓</div>
+          <div style="font-size:11px;color:#1b3150;line-height:1.75;">
             화면 우측 하단 <b>사용안내</b> 버튼을 누르면 이 안내가 열립니다. 그 위 <b>초기화</b> 버튼으로 입력을 되돌립니다.
           </div>
         </div>
@@ -1107,39 +1117,39 @@ input[type="number"]{-moz-appearance:textfield;}
           <div class="nb-txt">아래 순서대로 입력하면 급탕량과 보일러 출력이 자동으로 산정됩니다.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:13px;">
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">0</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:11px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">0</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">🏗️ 프로젝트 정보 입력</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">공사명, 작성자, 작성일을 입력합니다. A4 산정서 표지에 자동 반영됩니다.</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">🏗️ 프로젝트 정보 입력</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.75;">공사명, 작성자, 작성일을 입력합니다. A4 산정서 표지에 자동 반영됩니다.</div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">1</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:11px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">1</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">🏢 건물 용도 선택</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">12개 용도 버튼 중 해당 용도를 클릭합니다. 1인 1일 급탕량(60℃ 기준)과 표준 사용시간이 자동 적용됩니다. <b>직접 입력</b> 선택 시 원단위 직접 입력 가능.</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">🏢 건물 용도 선택</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.75;">12개 용도 버튼 중 해당 용도를 클릭합니다. 1인 1일 급탕량(60℃ 기준)과 표준 사용시간이 자동 적용됩니다. <b>직접 입력</b> 선택 시 원단위 직접 입력 가능.</div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">2</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:11px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">2</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">👥 사용인원 입력</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">설계 대상 총 사용인원(명)을 입력합니다. 일 사용시간은 용도에 따라 자동 적용되며 수정 가능. 1일 급탕량 = 인원 × 원단위(동시사용률은 곱하지 않음).</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">👥 사용인원 입력</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.75;">설계 대상 총 사용인원(명)을 입력합니다. 일 사용시간은 용도에 따라 자동 적용되며 수정 가능. 1일 급탕량 = 인원 × 원단위(동시사용률은 곱하지 않음).</div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;padding:11px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#c2410c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">3</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:11px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">3</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#7c2d12;margin-bottom:3px;">🌡️ 온도 조건 설정</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75;">급탕온도(기본 60℃), 급수온도(기본 10℃), 사용온도(기본 42℃)를 입력합니다. 보일러 효율(기본 90%)과 여유율(기본 20%)도 설정합니다.</div>
+              <div style="font-size:11px;font-weight:800;color:#1b3150;margin-bottom:3px;">🌡️ 온도 조건 설정</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.75;">급탕온도(기본 60℃), 급수온도(기본 10℃), 사용온도(기본 42℃)를 입력합니다. 보일러 효율(기본 90%)과 여유율(기본 20%)도 설정합니다.</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:flex-start;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:9px;padding:11px;">
             <div style="width:28px;height:28px;border-radius:50%;background:#15803d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">4</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:3px;">⚡ 산정 실행 → 결과 확인</div>
-              <div style="font-size:10.5px;color:#14532d;line-height:1.75;"><b>⚡ 급탕량·보일러 출력 자동 산정</b> 버튼을 클릭합니다. 1일 최대급탕량, 시간·분 급탕량, 보일러 필요 출력(kW/Mcal) 및 상세 계산서가 즉시 표시되며 A4 미리보기 탭이 자동 갱신됩니다.</div>
+              <div style="font-size:11px;color:#14532d;line-height:1.75;"><b>⚡ 급탕량·보일러 출력 자동 산정</b> 버튼을 클릭합니다. 1일 최대급탕량, 시간·분 급탕량, 보일러 필요 출력(kW/Mcal) 및 상세 계산서가 즉시 표시되며 A4 미리보기 탭이 자동 갱신됩니다.</div>
             </div>
           </div>
         </div>
@@ -1202,29 +1212,29 @@ input[type="number"]{-moz-appearance:textfield;}
             <span style="font-size:18px;">🖨️</span>
             <div>
               <div style="font-size:11px;font-weight:800;color:#0e7490;">인쇄 버튼</div>
-              <div style="font-size:10px;color:#164e63;line-height:1.6;">브라우저 인쇄 다이얼로그 → <b>PDF로 저장</b> 또는 실제 프린터 출력. A4 용지 크기·여백 자동 적용.</div>
+              <div style="font-size:11px;color:#164e63;line-height:1.6;">브라우저 인쇄 다이얼로그 → <b>PDF로 저장</b> 또는 실제 프린터 출력. A4 용지 크기·여백 자동 적용.</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:center;background:#fef2f2;border:1.5px solid #fecaca;border-radius:8px;padding:9px 12px;">
             <span style="font-size:18px;">📕</span>
             <div>
               <div style="font-size:11px;font-weight:800;color:#dc2626;">PDF 저장 버튼</div>
-              <div style="font-size:10px;color:#7f1d1d;line-height:1.6;">브라우저 인쇄 대화상자에서 <b>대상: PDF로 저장</b>을 고릅니다. 글자를 검색·선택할 수 있는 텍스트 PDF 로 나옵니다.</div>
+              <div style="font-size:11px;color:#7f1d1d;line-height:1.6;">브라우저 인쇄 대화상자에서 <b>대상: PDF로 저장</b>을 고릅니다. 글자를 검색·선택할 수 있는 텍스트 PDF 로 나옵니다.</div>
             </div>
           </div>
           <div style="display:flex;gap:10px;align-items:center;background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:8px;padding:9px 12px;">
             <span style="font-size:18px;">🖼️</span>
             <div>
               <div style="font-size:11px;font-weight:800;color:#7e22ce;">JPG 저장 버튼</div>
-              <div style="font-size:10px;color:#4c1d95;line-height:1.6;">A4 산정서를 2× 해상도 JPEG 이미지로 저장. 보고서 이미지 첨부용으로 활용.</div>
+              <div style="font-size:11px;color:#4c1d95;line-height:1.6;">A4 산정서를 2× 해상도 JPEG 이미지로 저장. 보고서 이미지 첨부용으로 활용.</div>
             </div>
           </div>
         </div>
 
         <div class="modal-sec">🔄 초기화</div>
-        <div style="background:#fffbf7;border:1.5px solid #fcd9aa;border-radius:8px;padding:10px 12px;font-size:10.5px;color:#78350f;line-height:1.75;margin-bottom:10px;">
+        <div style="background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:8px;padding:10px 12px;font-size:11px;color:#1b3150;line-height:1.75;margin-bottom:10px;">
           헤더의 <b>🔄 초기화</b> 버튼을 클릭하면 사용인원·온도·결과 패널이 모두 초기화됩니다.<br>
-          <span style="color:#c2410c;font-weight:700;">※ 공사명·작성자 정보는 초기화되지 않고 유지됩니다.</span>
+          <span style="color:#2d5186;font-weight:700;">※ 공사명·작성자 정보는 초기화되지 않고 유지됩니다.</span>
         </div>
 
         <div class="nb grn">
@@ -1430,7 +1440,7 @@ function doCalc() {
 Q<sub>day</sub> = ${N} × ${q} = <strong>${Math.round(Q_day_60).toLocaleString()} L/day</strong><br>
 Q<sub>h</sub> = ${Math.round(Q_day_60).toLocaleString()} × ${Kh} / ${T} = <strong>${Math.round(Q_h).toLocaleString()} L/h</strong><br>
 H = ${Math.round(Q_h).toLocaleString()} × (${Thot}-${Tcold}) / ${eff} = <strong>${Math.round(H_kcal).toLocaleString()} kcal/h</strong><br>
-P = ${H_kW_base.toFixed(2)} kW × (1+${sf.toFixed(2)}) = <strong style="color:#c2410c;">${H_kW.toFixed(1)} kW</strong>
+P = ${H_kW_base.toFixed(2)} kW × (1+${sf.toFixed(2)}) = <strong style="color:#2d5186;">${H_kW.toFixed(1)} kW</strong>
   `;
 
   // 노트
@@ -1801,9 +1811,9 @@ function renderRefTable() {
     <tr>
       <td style="text-align:left;">${t.ico} ${t.nm}</td>
       <td>${t.unit}</td>
-      <td class="mono" style="font-weight:800;color:#c2410c;">${t.q}</td>
+      <td class="mono" style="font-weight:800;color:#2d5186;">${t.q}</td>
       <td class="mono">${t.h}</td>
-      <td style="font-size:9.5px;text-align:left;color:#6b7280;">${t.note}</td>
+      <td style="font-size:11px;text-align:left;color:#6b7280;">${t.note}</td>
     </tr>
   `).join('');
 
@@ -1814,7 +1824,7 @@ function renderRefTable() {
     <tbody>
       ${BUILDING_TYPES.filter(t=>t.id!=='custom').map(t=>`
         <tr><td style="text-align:left;">${t.ico} ${t.nm}</td>
-        <td class="mono" style="font-weight:800;color:#c2410c;">${t.q}</td>
+        <td class="mono" style="font-weight:800;color:#2d5186;">${t.q}</td>
         <td>${t.h}</td></tr>
       `).join('')}
     </tbody>
@@ -1855,7 +1865,7 @@ function renderA4(r){
   <colgroup><col style="width:42%"><col style="width:22%"><col style="width:36%"></colgroup>
   <thead><tr><th>산정 항목</th><th>산정값</th><th>산정식 및 비고</th></tr></thead>
   <tbody>
-    <tr><td>1일 최대급탕량 (60℃)</td><td style="text-align:center;font-weight:900;color:#c2410c;">${Math.round(r.Q_day_60).toLocaleString()} L/day</td><td>Q = ${r.N} × ${r.q}</td></tr>
+    <tr><td>1일 최대급탕량 (60℃)</td><td style="text-align:center;font-weight:900;color:#2d5186;">${Math.round(r.Q_day_60).toLocaleString()} L/day</td><td>Q = ${r.N} × ${r.q}</td></tr>
     <tr><td>1일 급탕량 (${r.Tuse}℃ 기준)</td><td style="text-align:center;font-weight:800;">${Math.round(r.Q_day_use).toLocaleString()} L/day</td><td>× 환산계수 ${r.convFactor.toFixed(3)}</td></tr>
     <tr><td>시간 최대급탕량 (Kh=1.5)</td><td style="text-align:center;font-weight:900;color:#0e7490;">${Math.round(r.Q_h).toLocaleString()} L/h</td><td>${Math.round(r.Q_day_60).toLocaleString()} × 1.5 / ${r.T}</td></tr>
     <tr><td>분 최대급탕량</td><td style="text-align:center;">${r.Q_min.toFixed(2)} L/min</td><td>Q_h ÷ 60</td></tr>
@@ -1922,7 +1932,7 @@ document.addEventListener('DOMContentLoaded', function(){
             nw.addEventListener('statechange', function(){
               if(nw.state==='installed' && navigator.serviceWorker.controller){
                 var b=document.createElement('div');
-                b.style.cssText='position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#c2410c;color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(194,65,12,.5);white-space:nowrap;font-family:inherit;';
+                b.style.cssText='position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#2d5186;color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(45,81,134,.5);white-space:nowrap;font-family:inherit;';
                 b.innerHTML='<span>🔄 새 버전 준비됨</span><button onclick="navigator.serviceWorker.ready.then(function(r){if(r.waiting)r.waiting.postMessage({type:\'SKIP_WAITING\'});});this.parentNode.remove();location.reload();" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:5px 12px;border-radius:7px;cursor:pointer;font-weight:800;font-family:inherit;">지금 적용</button><button onclick="this.parentNode.remove()" style="background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:16px;padding:0 4px;">✕</button>';
                 document.body.appendChild(b);
                 setTimeout(function(){if(b.parentNode)b.remove();},8000);
@@ -2079,6 +2089,16 @@ document.addEventListener('DOMContentLoaded', function(){
    처방: 캡처 직전 우리 문서의 light-DOM style/link 에 data-mm-own 을 찍고, 클론에서 표식 없는 style/link 를 제거한다.
    ② 라이브러리가 없으면(구 SW opaque 캐시 · CDN 차단) exportA4Jpg 가 ReferenceError 로 조용히 멈춘다(40 미리보기 미표시) → 지연 로더가 CDN 에서 받아 이어서 실행한다. 계산·출력 함수 무접촉(전역 html2canvas 래핑). */
 (function(){var CDN='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';var raw=window.html2canvas;var cur;function wrap(h){if(!h||h.__mm)return h;function p(el,opt){document.querySelectorAll('style,link[rel=stylesheet]').forEach(function(n){n.setAttribute('data-mm-own','1');});opt=Object.assign({},opt||{});var prev=opt.onclone;opt.onclone=function(doc,x){doc.querySelectorAll('style,link[rel=stylesheet]').forEach(function(n){if(!n.hasAttribute('data-mm-own')&&(n.textContent||'').indexOf('___html2canvas___')<0)n.remove();});return prev?prev(doc,x):undefined;};return h(el,opt);}p.__mm=1;try{Object.keys(h).forEach(function(k){p[k]=h[k];});}catch(e){}return p;}function lazy(el,opt){return new Promise(function(res,rej){var s=document.createElement('script');s.src=CDN;s.onload=function(){if(cur&&cur!==lazy)res(cur(el,opt));else rej(new Error('html2canvas 초기화 실패'));};s.onerror=function(){rej(new Error('html2canvas 로드 실패 — 네트워크·차단 확인'));};document.head.appendChild(s);});}cur=raw?wrap(raw):lazy;try{Object.defineProperty(window,'html2canvas',{configurable:true,get:function(){return cur;},set:function(v){cur=wrap(v);}});}catch(e){window.html2canvas=cur;}})();</script>
+<!-- ══ FOOTER (하단 버전 표시) ══ -->
+<footer class="mm-foot no-print">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-nm">MANMIN Ver-5.0</div>
+      <div class="foot-desc">급탕량 · 보일러 출력 산정 시스템 | 용도별 급탕 기준</div>
+    </div>
+    <div class="foot-copy">ARCHITECT KIM MANMIN © 2026</div>
+  </div>
+</footer>
 </body>
 </html>
 
