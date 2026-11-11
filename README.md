@@ -1,5 +1,10 @@
 # 급탕설비 — 급탕량·보일러 출력 산정 시스템
 
+## v6.1.0 (2026-11-12) — 건물개요 공통 원본 v1.2
+
+- MM-PROJECT v1.1 → v1.2(원본 inject.py — 불러오기 창 표 칸 `white-space:normal` · 판 표기). 저장값 · 파일 형식 · 칸 설정 같음(정밀검토 B5 · 작업지시서 §25-6-76).
+- 판 6.1 · sw `geuptang-v6.1.0` · 계산 · 인쇄 · MM-PRINT 구간 · 사용자 매뉴얼 변경 없음.
+
 사용자 매뉴얼: https://manminkim-eng.github.io/Hot-Water-Supply-System/manual/
 
 **MANMIN-Ver5.0** | 기계설비 기술기준 국토교통부 고시 제2021-851호(제2026-360호 타법개정, 2026.7.8. 시행) 별표 5 · KDS 31 30 20:2021 — 1인 1일 급탕량 · K<sub>h</sub> · 보일러 산정식은 MANMIN 참고값(기준에 수치 없음)
