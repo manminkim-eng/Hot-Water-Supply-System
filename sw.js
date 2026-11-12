@@ -1,4 +1,5 @@
 /* ═══════════════════════════════════════════════════
+   v6.1.2 (2026-11-12) — Pretendard CSS SRI(integrity · crossorigin)(정밀검토 C2) — 화면 · 계산 · 인쇄 불변 · 작업지시서 §25-6-82 · 캐시명 v6.1.2 (종전 v6.1.1)
    v6.1.1 (2026-11-12) — 건물개요 공통 원본 MM-PROJECT v1.2 → v1.3(불러오기 창 표 칸 모양 고정 — 도구 CSS 가 새지 않음 · 저장값 같음, 정밀검토 C10) · 작업지시서 §25-6-80 · 판 6.1 · 캐시명 v6.1.1 (종전 v6.1.0)
    v6.1.0 (2026-11-12) — 건물개요 공통 원본 MM-PROJECT v1.1 → v1.2(불러오기 창 칸 줄바꿈 · 저장값 같음, 정밀검토 B5 · 작업지시서 §25-6-76) · 캐시명 v6.1.0 (종전 geuptang-v5.0.11)
    v5.0.5 2026-10-31 — 캐시명을 도구 판에 맞춤(종전 geuptang-v5.1.12 ↔ 도구 판 불일치, §25-7) · 캐시명 geuptang-v5.0.5
@@ -43,7 +44,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const CACHE  = 'geuptang-v6.1.1';  /* 2026-10-13 v5.0.2 매뉴얼 버튼 */
+const CACHE  = 'geuptang-v6.1.2';  /* 2026-10-13 v5.0.2 매뉴얼 버튼 */
 
 /* 2026-09-01 오업로드로 이 주소에 박힌 냉온배관 캐시 — 이번 배포에서 함께 지운다 */
 const ORPHAN = ['pipe-v5.0.0'];
