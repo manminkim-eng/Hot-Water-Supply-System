@@ -752,7 +752,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
           </div>
           <div class="nb org">
             <div class="nb-tit">⚠️ 기준 규정</div>
-            <div class="nb-txt">• 급탕배관 급탕온도 55~60℃ 유지 — 레지오넬라균 방지(KDS 31 30 20 : 2026 1.6.9) · 이 산정기는 60℃ 초과 입력을 막습니다<br>• 위생기구 급탕온도는 온도제한장치 · 혼합장치로 43℃ 이하로 제한할 수 있어야 함(별표 5 2.2.7(2)) — 가열장치 온도조절기로 대신할 수 없음(2.2.7(1))<br>• 60℃ 이상으로 공급되는 난방겸용 급탕가열장치는 온도조절밸브로 급탕배관 60℃ 이하로 제한(별표 5 2.2.3(1)) · 탱크 없는 순간 급탕가열장치는 60℃ 이하로 설정할 수 있어야 함(별표 5 2.2.5(3))</div>
+            <div class="nb-txt">• 급탕배관 급탕온도 55~60℃ 유지 — 레지오넬라균 방지(KDS 31 30 20 : 2026 1.6.9)<br>• 이 산정기는 급탕 공급온도 60 ℃ 이하로 계산(KDS 31 30 20 : 2026 1.6.9 배관 내 55~60 ℃ 유지 기준) — 55 ℃ 미만은 계산하되 「미충족」으로 판정<br>• 위생기구 급탕온도는 온도제한장치 · 혼합장치로 43℃ 이하로 제한할 수 있어야 함(별표 5 2.2.7(2)) — 가열장치 온도조절기로 대신할 수 없음(2.2.7(1))<br>• 60℃ 이상으로 공급되는 난방겸용 급탕가열장치는 온도조절밸브로 급탕배관 60℃ 이하로 제한(별표 5 2.2.3(1)) · 탱크 없는 순간 급탕가열장치는 60℃ 이하로 설정할 수 있어야 함(별표 5 2.2.5(3))</div>
           </div>
           <div class="fgrp" style="margin-top:8px;">
             <label class="flbl">보일러 효율 (%)</label>
@@ -1381,7 +1381,7 @@ function doCalc(quiet) {
   if (Thot <= Tcold) { showToast('⚠️ 급탕온도가 급수온도보다 높아야 합니다'); return; }
   if (Tuse <= Tcold) { showToast('⚠️ 사용온도는 급수온도보다 높아야 합니다'); return; }  // v6.1.4 교차검증 P2
   if (Tuse >= Thot) { showToast('⚠️ 사용온도는 급탕온도보다 낮아야 합니다'); return; }
-  if (Thot > 60) { showToast('⚠️ 급탕온도는 60℃ 이하로 설정하세요 (KDS 31 30 20 1.6.9 · 55~60℃ 유지)'); return; }
+  if (Thot > 60) { showToast('⚠️ 이 산정기는 급탕 공급온도 60 ℃ 이하로 계산합니다 (KDS 31 30 20 : 2026 1.6.9 배관 내 55~60 ℃ 유지 기준)'); return; }  // v6.1.5 판단 항목 J1 — 차단 유지 · 문구 정리
 
   // ① 1일 최대 급탕량 (60℃ 기준) — v5.0.1 동시사용률 삭제
   const Q_day_60 = _r6(N * q);
@@ -1442,6 +1442,7 @@ function doCalc(quiet) {
     ['여유율 적용', `${sfPct}% (× ${(1+sf).toFixed(2)})`],
     [`보일러 필요 출력 (여유 포함)`, `${H_kW.toFixed(1)} kW`],
     ['Mcal/h 환산', `${H_Mcal.toFixed(2)} Mcal/h`],
+    ['급탕 온도 판정 (KDS 1.6.9)', (Thot >= 55 && Thot <= 60) ? '✅ 충족 (55~60 ℃)' : '❌ 미충족 — KDS 1.6.9 55~60 ℃ 유지'],  // v6.1.5 판단 항목 J2
   ];
 
   document.getElementById('detailTbody').innerHTML = rows.map((r,i) => {
@@ -1909,7 +1910,7 @@ function renderA4(r){
 <table class="a4-tbl">
   <thead><tr><th>기준 항목</th><th>규정 내용</th><th>적용 여부</th></tr></thead>
   <tbody>
-    <tr><td>급탕 온도</td><td>55~60℃ 유지 — 레지오넬라 방지 (KDS 31 30 20 1.6.9)</td><td style="text-align:center;">${(r.Thot>=55&&r.Thot<=60)?'✅ 충족':'⚠️ 확인필요'}</td></tr>
+    <tr><td>급탕 온도</td><td>55~60℃ 유지 — 레지오넬라 방지 (KDS 31 30 20 1.6.9)</td><td style="text-align:center;">${(r.Thot>=55&&r.Thot<=60)?'✅ 충족':'❌ 미충족 — KDS 1.6.9 55~60 ℃ 유지'}</td></tr>
     <tr><td>위생기구 급탕온도</td><td>온도제한장치 · 혼합장치로 43℃ 이하 제한 (별표 5 2.2.7 — 가열장치 온도조절기로 대신 불가)</td><td style="text-align:center;">목표 ${r.Tuse}℃${r.Tuse>43?' ⚠️':''} · 📌 장치 확인</td></tr>
     <tr><td>급탕배관 길이</td><td>급탕열원 → 위생기구 15 m 이하 (별표 5 2.2.2(3))</td><td style="text-align:center;">판정 제외(별도 검토)</td></tr>
     <tr><td>환탕 배관</td><td>중앙식 — 환탕관 · 순환펌프 (별표 5 2.2.1(6) · KDS 1.6.6 30 m 이상)</td><td style="text-align:center;">판정 제외(별도 검토)</td></tr>
@@ -2272,11 +2273,11 @@ input[data-mm-warn]{outline:2px solid #d32f2f!important;outline-offset:1px;backg
 .mm-warn-note{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid;}}
 </style>
 <script id="mm-warn-cfg">
-/* v6.1.4 — 급탕 입력 경고(기계 2차 교차검증 P5) · all:true(숨은 탭 칸도 판정 → A4 · 인쇄 · JPG에 「⚠ 입력 확인」 줄) · 효율 > 100 · 사용온도 ≤ 급수온도 · 급탕 > 60 은 산정 차단 */
+/* v6.1.4 — 급탕 입력 경고(기계 2차 교차검증 P5) · all:true(숨은 탭 칸도 판정 → A4 · 인쇄 · JPG에 「⚠ 입력 확인」 줄) · 효율 > 100 · 사용온도 ≤ 급수온도 · 급탕 > 60 은 산정 차단 · v6.1.5 J1 급탕 > 60 문구 정리 */
 window.MM_WARN_CFG={report:'#a4WarnBox',all:true,rules:[
  {sel:'#persons',name:'사용인원',extra:function(el,n){return n%1?'소수 인원 — 입력 그대로 계산(확인)':null;}},
  {sel:'#useHours',name:'일 사용시간',get empty(){return ((typeof selectedType!=='undefined'&&selectedType)?selectedType.h:8)+' h(용도 표준)';},neg:'음수 — 산정 안 함',cond:function(){return typeof selectedType!=='undefined'&&!!selectedType;},extra:function(el,n){return n===0?'0 — 산정 안 함':(n>24?'24 h 초과 — 확인':null);}},
- {sel:'#hotTemp',name:'급탕 온도',empty:'60 ℃',neg:'음수 — 산정 안 함',extra:function(el,n){return n>60?'60 ℃ 초과 — 산정 안 함':null;}},
+ {sel:'#hotTemp',name:'급탕 온도',empty:'60 ℃',neg:'음수 — 산정 안 함',extra:function(el,n){return n>60?'60 ℃ 초과 — 이 산정기는 60 ℃ 이하로 계산(산정 안 함)':null;}},
  {sel:'#coldTemp',name:'급수 온도',empty:'10 ℃',neg:'음수 — 확인'},
  {sel:'#useTemp',name:'사용 온도',empty:'42 ℃',extra:function(el,n){var c=parseFloat((document.getElementById('coldTemp')||{}).value);if(isNaN(c))c=10;return n<=c?'급수온도 이하 — 산정 안 함':null;}},
  {sel:'#efficiency',name:'보일러 효율',empty:'90 %',neg:'음수 — 산정 안 함',extra:function(el,n){return n===0?'0 — 산정 안 함':(n>100?'100 % 초과 — 산정 안 함':null);}},
