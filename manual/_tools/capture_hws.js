@@ -11,6 +11,8 @@ const HELP=`window.__vis=e=>e&&e.getClientRects().length>0;
 window.__card=t=>{const h=[...document.querySelectorAll('.card-tit')].find(e=>__vis(e)&&e.textContent.trim().startsWith(t));return h?h.closest('.card'):null;};
 window.__find=sel=>{if(sel.startsWith('card:'))return __card(sel.slice(5));
  if(sel.startsWith('a4sub:'))return document.querySelectorAll('#a4Page .a4-sub')[+sel.slice(6)]||null;
+ if(sel.startsWith('tr:')){const t=sel.slice(3);return [...document.querySelectorAll('#detailTbody tr')].find(tr=>tr.textContent.includes(t))||null;}
+ if(sel.startsWith('a4tr:')){const t=sel.slice(5);return [...document.querySelectorAll('#a4Page tr')].find(tr=>tr.textContent.includes(t))||null;}
  if(sel.startsWith('up:')){const [a,b]=sel.slice(3).split('|');const e=document.querySelector(a);return e?e.closest(b):null;}
  for(const s of sel.split(',')){const e=[...document.querySelectorAll(s)].find(__vis);if(e)return e;}return null;};
 window.__tab=t=>switchTab(t,document.getElementById('tab-btn-'+t));
@@ -20,7 +22,7 @@ window.__run=(id,N)=>{resetAll();__tab('calc');__proj();selectBtype(id);__set('p
 window.__A=()=>__run('apartment',300);
 window.__B=()=>__run('office',100);
 window.__ex=()=>{const R=window._calcResult;return {bt:R.btype.id,btNm:R.btype.nm,unit:R.btype.unit,N:R.N,q:R.q,T:R.T,Thot:R.Thot,Tcold:R.Tcold,Tuse:R.Tuse,effPct:R.effPct,sfPct:R.sfPct,Kh:R.Kh,
-  Q_day_60:R.Q_day_60,Q_day_use:R.Q_day_use,convFactor:R.convFactor,Q_h:R.Q_h,Q_min:R.Q_min,H_kcal:R.H_kcal,H_kW_base:R.H_kW_base,H_kW:R.H_kW,H_Mcal:R.H_Mcal,
+  Q_day_60:R.Q_day_60,Q_day_use:R.Q_day_use,convFactor:R.convFactor,Q_h:R.Q_h,Q_min:R.Q_min,H_kcal:R.H_kcal,H_kW_base:R.H_kW_base,H_kW:R.H_kW,H_Mcal:R.H_Mcal,Q_h_sup:R.Q_h_sup,
   sum:[...document.querySelectorAll('.sum-bar .sum-item')].map(e=>e.textContent.trim())};};
 window.__tables=()=>({btypes:BUILDING_TYPES});`;
 const SHOTS=[
@@ -40,6 +42,10 @@ const SHOTS=[
  {id:'s14_modal_temp',pre:"switchGuideTab(2);document.querySelector('#guideModal .modal-box').scrollTop=0",wait:1000,fixed:true,post:"closeGuide()",clip:'#guideModal .modal-box',m:[]},
  {id:'s15_a4',pre:"__A();__tab('a4');scrollTo(0,0)",wait:1500,clip:'viewport',m:[['.btn-print','인쇄 / PDF'],['.btn-jpg-a4','JPG 저장'],['#a4Page','A4 산정서']]},
  {id:'s16_a4page',clip:'#a4Page',m:[['a4sub:0','1. 설계 개요'],['a4sub:1','2. 주요 산정 결과'],['a4sub:2','3. 상세 산정 계산서'],['a4sub:3','4. 설계 기준 적합성 검토']]},
+ {id:'s22_temp55',pre:"__A();__set('hotTemp',55);doCalc(true);window.scrollTo(0,0)",wait:900,clip:'card:상세 산정 결과',union:'.formula-box',m:[['tr:급탕 공급 체적','급탕 공급 체적(55℃ 공급) 행'],['tr:보일러 필요 출력','보일러 필요 출력 — 60℃ 때와 같음'],['#formulaDisplay','적용 산정식 — H · Q_h,sup 줄']]},
+ {id:'s22b_a4_55',pre:"__tab('a4');scrollTo(0,0)",wait:1500,clip:'a4sub:0',union:'a4sub:1',post:"__A()",m:[['a4tr:급탕 온도','급탕 온도 · 공급 체적'],['a4tr:서 명 란','적용 기준 KDS 31 30 20 : 2026']]},
+ {id:'s23_warn',pre:"__A();__set('safetyFactor','');doCalc(true);window.MMWarn&&MMWarn.run();window.scrollTo(0,0)",wait:1200,clip:'card:STEP 3',union:'.col-input .reset-btn',m:[['#safetyFactor','빈 칸 — 빨간 테두리'],['.mm-warn-msg','안내 — 기본값 20 % 적용']]},
+ {id:'s24_a4warn',pre:"__tab('a4');scrollTo(0,0)",wait:1500,clip:'a4sub:3',union:'#a4WarnBox',post:"__A();window.MMWarn&&MMWarn.run()",m:[['a4tr:위생기구 급탕온도','목표 온도 · 📌 장치 확인'],['a4tr:급탕배관 길이','판정 제외(별도 검토)'],['a4tr:환탕 배관','판정 제외(별도 검토)'],['#a4WarnBox .mm-warn-note','⚠ 입력 확인 줄']]},
  {id:"s20_proj_menu",pre:"__tab('calc');localStorage.setItem('MANMIN_PROJECT_V1',JSON.stringify({\"사업명\": \"만민 건축사 신사옥 신축공사 설계용역\", \"작성자\": \"김만민 건축사\", \"연면적\": \"12500\", \"지상층\": \"15\", \"지하층\": \"2\", \"updated\": \"2026-11-08 10:00\", \"from\": \"부하계산(RTS)\"}));window.scrollTo(0,0);document.querySelector('.mm-proj-btn').click()",wait:700,clip:'viewport',post:"document.querySelectorAll('.mm-proj-menu').forEach(e=>e.remove())",m:[[".mm-proj-btn", "「🏢 건물개요」 단추(오른쪽 아래)"], [".mm-proj-menu button[data-a=\"save\"]", "저장 — 지금 값 담기"], [".mm-proj-menu button[data-a=\"load\"]", "불러오기"], [".mm-proj-menu button[data-a=\"exp\"]", "파일로 내보내기(.json)"], [".mm-proj-menu button[data-a=\"imp\"]", "파일 가져오기"]]},
  {id:"s21_proj_load",pre:"(()=>{window.__mmK=['사업명','작성자','높이'];window.__mmB=__mmK.map(k=>MMProject.fields(k).map(e=>e.value));const __sv=(e,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(e,v);e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));};const e=MMProject.fields('사업명')[0];if(e)__sv(e,'');localStorage.setItem('MANMIN_PROJECT_V1',JSON.stringify({\"사업명\": \"만민 건축사 신사옥 신축공사 설계용역\", \"작성자\": \"김만민 건축사\", \"연면적\": \"12500\", \"지상층\": \"15\", \"지하층\": \"2\", \"updated\": \"2026-11-08 10:00\", \"from\": \"부하계산(RTS)\"}));MMProject.load();})()",wait:900,fixed:true,clip:'.mm-proj-dlg',post:"(()=>{document.querySelectorAll('.mm-proj-back').forEach(e=>e.remove());const __sv=(e,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(e,v);e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));};__mmK.forEach((k,i)=>MMProject.fields(k).forEach((e,j)=>{if(e.value!==__mmB[i][j])__sv(e,__mmB[i][j]);}));localStorage.removeItem('MANMIN_PROJECT_V1');})()",m:[[".mm-proj-dlg input[type=checkbox]", "체크한 항목만 채움(빈 칸은 체크된 채로)"], [".mm-proj-dlg .mm-proj-warn", "이미 입력된 칸 — 직접 체크해야 덮어씀"], [".mm-proj-dlg .mm-proj-ok", "채우기"]]},
 ];
@@ -57,6 +63,9 @@ const SHOTS=[
   await pg.waitForTimeout(S.wait||600);
   if(S.id==='s01_overview'){ex.A=await pg.evaluate('__ex()');ex.tables=await pg.evaluate('__tables()');}
   if(S.id==='s10_result_b')ex.B=await pg.evaluate('__ex()');
+  if(S.id==='s22_temp55')ex.T55=await pg.evaluate('__ex()');
+  if(S.id==='s22b_a4_55')ex.A_a4_55=await pg.evaluate(()=>document.getElementById('a4Page').innerText.replace(/\s+/g,' '));
+  if(S.id==='s24_a4warn')ex.A_a4_warn=await pg.evaluate(()=>document.getElementById('a4Page').innerText.replace(/\s+/g,' '));
   if(S.id==='s16_a4page')ex.A_a4=await pg.evaluate(()=>document.getElementById('a4Page').innerText.replace(/\s+/g,' '));
   const info=await pg.evaluate(({S,VW,VH})=>{
    const abs=e=>{const r=e.getBoundingClientRect();return {x:r.left+scrollX,y:r.top+scrollY,w:r.width,h:r.height};};
